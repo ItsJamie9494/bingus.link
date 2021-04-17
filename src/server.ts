@@ -15,12 +15,25 @@
 
 import express from 'express'
 import * as dotenv from 'dotenv'
-
 dotenv.config()
 
-const app = express()
+import connection from './lib/database'
+import bodyParser from 'body-parser'
 
+import redirect from './routes/redirect'
+import url from './routes/url'
+const app = express()
 const port = process.env.PORT || 5000
+
+connection.once('open', () => console.log('✅ Database Connected'))
+connection.on('error', () => console.error('❌ Database Error'))
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+app.use('/', redirect)
+app.use('/api/url', url)
+
 
 app.listen(port, () => {
     console.log(`🚀 Server Started, listening on ${port}`)
