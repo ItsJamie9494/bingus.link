@@ -39,9 +39,7 @@ router.post('/shorten', async (req: express.Request, res: express.Response) => {
                 longURL
             })
 
-            if (url) {
-                res.json({ error: 'URL Already In Existence', url: url })
-            } else {
+            {
                 const shortURL = process.env.baseURL + '/' + urlCode
 
                 url = new Url({
