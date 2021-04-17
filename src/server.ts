@@ -17,6 +17,7 @@ import express from 'express'
 import * as dotenv from 'dotenv'
 dotenv.config()
 import bodyParser from 'body-parser'
+import path from 'path'
 
 import connection from './lib/database'
 import redirect from './routes/redirect'
@@ -31,9 +32,9 @@ connection.on('error', () => console.error('❌ Database Error'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+app.use(express.static(path.join(__dirname, 'static')))
 app.use('/', redirect)
 app.use('/api/url', url)
-
 
 
 app.listen(port, () => {
