@@ -28,7 +28,7 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
             urlCode: req.params.code
         })
         if (url) {
-            let decryptedURL = decrypt(url.longURL)
+            let decryptedURL = decrypt(JSON.parse(url.longURL))
             return res.redirect(decryptedURL)
         } else {
             return res.status(404).json({ error: 'noURL', message: `No URL found for code ${req.params.code}` })
