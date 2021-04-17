@@ -40,7 +40,7 @@ router.post('/shorten', async (req: express.Request, res: express.Response) => {
 
             let url = new Url({
                 urlCode,
-                longURL: encrypt(longURL),
+                longURL: JSON.stringify(encrypt(longURL)),
                 shortURL,
                 date: new Date()
             })
