@@ -45,13 +45,13 @@ router.post('/shorten', async (req: express.Request, res: express.Response) => {
                 const shortURL = process.env.baseURL + '/' + urlCode
 
                 url = new Url({
+                    urlCode,
                     longURL,
                     shortURL,
-                    urlCode,
                     date: new Date()
                 })
                 await url.save()
-                res.json({ success: 'URL Created', url: url })
+                res.json({ success: 'URL Created', url: url.shortURL, urlCode: url.urlCode })
             }
         } catch (err: unknown) {
             res.status(500).json({ error: 'Server Error', message: `${err}` })
