@@ -14,6 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import crypto from 'crypto'
+import { HashInterface } from '../interfaces/HashInterface'
 
 const algorithm = 'base64'
 const iv = crypto.randomBytes(16)
@@ -27,11 +28,6 @@ export const encrypt = (contents: string) => {
         iv: iv.toString('hex'),
         content: encrypted.toString('hex')
     }
-}
-
-interface HashInterface {
-    iv: string,
-    content: string
 }
 
 export const decrypt = (hash: HashInterface) => {
