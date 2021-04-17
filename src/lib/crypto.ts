@@ -16,7 +16,7 @@
 import crypto from 'crypto'
 import { HashInterface } from '../interfaces/HashInterface'
 
-const algorithm = 'base64'
+const algorithm = 'aes-256-ctr'
 const iv = crypto.randomBytes(16)
 
 export const encrypt = (contents: string) => {
