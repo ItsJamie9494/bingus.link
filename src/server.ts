@@ -16,11 +16,12 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 dotenv.config()
-import connection from './lib/database'
 import bodyParser from 'body-parser'
 
+import connection from './lib/database'
 import redirect from './routes/redirect'
 import url from './routes/url'
+
 const app = express()
 const port = process.env.PORT || 5000
 
@@ -32,6 +33,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use('/', redirect)
 app.use('/api/url', url)
+
 
 
 app.listen(port, () => {
