@@ -16,7 +16,6 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 dotenv.config()
-
 import connection from './lib/database'
 import bodyParser from 'body-parser'
 
@@ -36,5 +35,5 @@ app.use('/api/url', url)
 
 
 app.listen(port, () => {
-    console.log(`🚀 Server Started, listening on ${port}`)
+    console.log(`🚀 Server Started, listening on port ${port}`)
 })
