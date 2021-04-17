@@ -1,0 +1,10 @@
+{
+  "name": "bingus-link",
+  "version": "1.0.0",
+  "description": "Simple URL Shortener powering bingus.link",
+  "main": "index.js",
+  "repository": "https://github.com/trevorthalacker/bingus.link.git",
+  "author": "Trevor Thalacker <hello@trevorthalacker.com>",
+  "license": "AGPL-3.0",
+  "private": true
+}
