@@ -13,15 +13,20 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import express from 'express'
-import * as dotenv from 'dotenv'
+import mongoose from 'mongoose'
 
-dotenv.config()
+const USER = process.env.DB_USER
+const PASSWORD = process.env.DB_PASSWORD
+const HOST = process.env.DB_HOST
+const DB = process.env.DB
 
-const app = express()
+const DB_URI = `mongodb+src://${USER}:${PASSWORD}@${HOST}/${DB}?retryWrites=true&w=majority`
 
-const port = process.env.PORT || 5000
-
-app.listen(port, () => {
-    console.log(`🚀 Server Started, listening on ${port}`)
+mongoose.connect(DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
+
+const connection = mongoose.connection
+
+export default connection
