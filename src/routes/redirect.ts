@@ -16,6 +16,7 @@
 import express from 'express'
 
 import Url from '../models/UrlModel'
+import { decrypt } from '../lib/crypto'
 
 const router = express.Router()
 
@@ -27,7 +28,8 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
             urlCode: req.params.code
         })
         if (url) {
-            return res.redirect(url.longURL)
+            let decryptedURL = decrypt(url.longURL)
+            return res.redirect(decryptedURL)
         } else {
             return res.status(404).json({ error: 'noURL', message: `No URL found for code ${req.params.code}` })
         }

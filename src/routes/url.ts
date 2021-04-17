@@ -18,6 +18,7 @@ import validUrl from 'valid-url'
 import shortid from 'shortid'
 
 import Url from '../models/UrlModel'
+import { encrypt } from '../lib/crypto'
 
 const router = express.Router()
 
@@ -25,7 +26,7 @@ const router = express.Router()
 // @description   Create Short URL
 
 router.post('/shorten', async (req: express.Request, res: express.Response) => {
-    const { longURL } = req.body
+    const longURL: string = req.body
 
     if (!validUrl.isUri(process.env.baseURL || 'http://localhost:9000')) {
         return res.status(401).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
@@ -35,22 +36,16 @@ router.post('/shorten', async (req: express.Request, res: express.Response) => {
 
     if (validUrl.isUri(longURL)) {
         try {
-            let url = await Url.findOne({
-                longURL
+            const shortURL = process.env.baseURL + '/' + urlCode
+
+            let url = new Url({
+                urlCode,
+                longURL: encrypt(longURL),
+                shortURL,
+                date: new Date()
             })
-
-            {
-                const shortURL = process.env.baseURL + '/' + urlCode
-
-                url = new Url({
-                    urlCode,
-                    longURL,
-                    shortURL,
-                    date: new Date()
-                })
-                await url.save()
-                res.json({ success: 'URL Created', url: url.shortURL, urlCode: url.urlCode })
-            }
+            await url.save()
+            res.json({ success: 'URL Created', url: url.shortURL, urlCode: url.urlCode })
         } catch (err: unknown) {
             res.status(500).json({ error: 'Server Error', message: `${err}` })
         }
