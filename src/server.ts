@@ -32,7 +32,7 @@ connection.on('error', () => console.error('❌ Database Error'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
-app.use(express.static(path.join(__dirname, 'static')))
+app.use(express.static(path.resolve('static')))
 app.use('/', redirect)
 app.use('/api/url', url)
 

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Feedback</title>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            font-family: 'Inter', 'Segoe UI', system-ui, Tahoma, Geneva, Verdana, sans-serif;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #fb {
+            width: 100vw;
+            padding: 36px;
+            border-radius: 6px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #dlgo {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            min-height: 52px;
+            background-color: black;
+            border-radius: 100%;
+            margin: 0 auto;
+            margin-bottom: 24px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 450px;
+            min-height: 450px;
+            max-width: 468px;
+            resize: none;
+            background-color: rgb(243, 243, 243);
+            outline: none;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            padding: 16px;
+        }
+
+        p {
+            opacity: 0.5;
+            margin: 0;
+            margin-top: -6px;
+            margin-bottom: 28px;
+            max-width: 400px;
+        }
+
+        button {
+            margin: 24px 0;
+            padding: 10px 20px;
+            background-color: #256EF5;
+            font-size: 15px;
+            font-weight: 500;
+            color: white;
+            border: none;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            transition: 0.2s all;
+        }
+
+        button:hover {
+            border: 2px solid #256EF5;
+            background-color: transparent;
+            color: #256EF5;
+            cursor: pointer;
+        }
+
+        button:focus {
+            border: 2px solid #256EF5;
+            background-color: transparent;
+            color: #256EF5;
+            cursor: pointer;
+            box-shadow: 0 0 0 4px #256ef582;
+        }
+
+        #fb, #fb-done {
+            transition: 0.3s opacity;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+    </style>
+    <script>
+        window.feedbackDone = false;
+
+        window.sendFeedback = () => {
+            if(window.feedbackDone == true) {
+                return window.close()
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const products = {
+                dot: "Dot Browser"
+            }
+
+            fetch("/feedback/send", { 
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    product: products[urlParams.get("product")],
+                    version: urlParams.get("version"),
+                    channel: urlParams.get("channel"),
+                    feedback: document.getElementById("fb-ta").value
+                })
+            }).then(res => {
+                if(res.status == 200) {
+                    document.getElementById("fb-m").style.display = "";
+                    document.getElementById("fb-ta").style.display = "none";
+                    document.getElementById("fb-btn").style.display = "none";
+                    document.getElementById("fb-t").innerHTML = "Thank you"
+                    document.getElementById("fb-d").innerHTML = `Thank you for taking the time to improve ${products[urlParams.get("product")]}!`
+
+                    window.feedbackDone = true;
+                } else {
+                    document.getElementById("fb-m").style.display = "none";
+                    document.getElementById("fb-ta").style.display = "none";
+                    document.getElementById("fb-btn").style.display = "none";
+                    document.getElementById("fb-t").innerHTML = "Error"
+                    document.getElementById("fb-d").innerHTML = `Failed to send feedback. Please let a maintainer know!` 
+                }
+            }).catch(res => {
+                document.getElementById("fb-m").style.display = "none";
+                document.getElementById("fb-ta").style.display = "none";
+                document.getElementById("fb-btn").style.display = "none";
+                document.getElementById("fb-t").innerHTML = "Error"
+                document.getElementById("fb-d").innerHTML = `Failed to send feedback. Please let a maintainer know!` 
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="fb">
+        <figure id="dlgo"></figure>
+        <h2 id="fb-t">Send feedback</h2>
+        <p id="fb-d">Your feedback will be used to improve Dot Browser and other Dot HQ products. It is completely anonymous.</p>
+        <textarea id="fb-ta" placeholder="Enter your feedback" maxlength="255"></textarea>
+        <img id="fb-m" style="display: none" src="https://i.imgur.com/3Ak6EZq.png" />
+        <button id="fb-btn" onclick="window.sendFeedback()">
+            Send feedback
+        </button>
+    </div>
+</body>
+</html>
