@@ -31,7 +31,7 @@ export const encrypt = (contents: string) => {
 }
 
 export const decrypt = (hash: HashInterface) => {
-    const decipher = crypto.createDecipheriv(algorithm, process.env.cryptoSecretKey || '', iv)
+    const decipher = crypto.createDecipheriv(algorithm, process.env.cryptoSecretKey || '', Buffer.from(hash.iv, 'hex'))
 
     const decryped = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()])
 
