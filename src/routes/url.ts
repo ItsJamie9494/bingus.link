@@ -28,7 +28,7 @@ const router = express.Router()
 router.post('/shorten', async (req: express.Request, res: express.Response) => {
     const { longURL } = req.body
 
-    if (!validUrl.isUri(process.env.baseURL || 'http://localhost:9000')) {
+    if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {
         return res.status(401).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
     }
 
