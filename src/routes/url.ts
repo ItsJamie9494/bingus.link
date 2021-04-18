@@ -24,32 +24,39 @@ const router = express.Router()
 
 // @route         POST /api/url/shorten
 // @description   Create Short URL
+router.post('/shorten', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    await res.setHeader('Access-Control-Allow-Origin', '*')
 
-router.post('/shorten', async (req: express.Request, res: express.Response) => {
-    res.header('Access-Control-Allow-Origin', '*')
     const { longURL, urlCode = shortid.generate() } = req.body
 
     if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {
-        return res.status(401).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
+        return res.status(500).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
     }
 
     if (validUrl.isUri(longURL)) {
         try {
+            if (await Url.findOne({
+                urlCode: urlCode
+            })) {
+                return res.status(400).json({ error: 'invalidURLCode',  message: 'Invalid URL Code' })
+            }
+
             const shortURL = process.env.baseURL + '/' + urlCode
 
             let url = new Url({
-                urlCode,
+                urlCode: encodeURIComponent(urlCode),
                 longURL: JSON.stringify(encrypt(longURL)),
                 shortURL,
                 date: new Date()
             })
             await url.save()
-            res.json({ success: 'URL Created', url: url.shortURL, urlCode: url.urlCode })
+            return res.json({ success: 'URL Created', url: url.shortURL, urlCode: url.urlCode })
         } catch (err: unknown) {
-            res.status(500).json({ error: 'Server Error', message: `${err}` })
+            console.error(`❌ ${err}`)
+            return res.status(500).json({ error: 'serverError', message: 'Server Error' })
         }
     } else {
-        res.status(401).json({ error: 'invalidLongURL',  message: 'Invalid Long URL' })
+        return res.status(400).json({ error: 'invalidLongURL',  message: 'Invalid Long URL' })
     }
 })
 

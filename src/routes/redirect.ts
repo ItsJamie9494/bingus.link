@@ -37,7 +37,7 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
     }
     catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        res.status(500).render('error', { title: 'Server Error | bingus.link', message: err })
+        return res.status(500).render('error', { title: 'Server Error | bingus.link', message: err })
     }
 })
 
