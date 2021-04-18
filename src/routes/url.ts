@@ -25,8 +25,9 @@ const router = express.Router()
 // @route         POST /api/url/shorten
 // @description   Create Short URL
 router.post('/shorten', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    await res.setHeader('Access-Control-Allow-Origin', '*')
-
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+    
     const { longURL, urlCode = shortid.generate() } = req.body
 
     if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {

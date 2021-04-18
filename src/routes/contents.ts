@@ -24,6 +24,8 @@ const router = express.Router()
 // @description   Redirect to the original URL
 router.get('/:code', async (req: express.Request, res: express.Response ) => {
     res.header('Access-Control-Allow-Origin', '*')
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+    
     try {
         let encodedURLCode = encodeURIComponent(req.params.code)
         const url = await Url.findOne({

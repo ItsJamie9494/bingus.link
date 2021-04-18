@@ -39,14 +39,21 @@ connection.on('error', () => console.error('❌ Database Error'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
-app.use(express.static(path.resolve('static')))
+app.use(express.static(path.resolve('static'), {
+    setHeaders: function(res: express.Response, path) {
+        res.set('Permissions-Policy', 'interest-cohort=()')
+    }
+}))
 app.get('/license', (req: express.Request, res: express.Response) => {
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.sendFile(path.resolve('static', 'license.html'))
 })
 app.get('/privacy', (req: express.Request, res: express.Response) => {
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.sendFile(path.resolve('static', 'privacy.html'))
 })
 app.get('/abuse', (req: express.Request, res: express.Response) => {
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.sendFile(path.resolve('static', 'abuse.html'))
 })
 app.use('/', redirect)
