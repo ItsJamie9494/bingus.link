@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+    binguslink:
+        container_name: bingus-link
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        expose:
+            - "5000"
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./:/app
+        env_file:
+            - .env
