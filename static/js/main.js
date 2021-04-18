@@ -41,8 +41,8 @@ window.shortenURL = () => {
         },
         body: formBody
     }).then(async res => {
+        const data = await res.json();
         if(res.status == 200) {
-            const data = await res.json();
             document.getElementById("bl-btn-h").onclick = () => window.resetPage();
             document.getElementById("bl-btn-h").innerHTML = "Shorten Another URL"
             document.getElementById("bl-btn-h").style.display = 'flex'
@@ -50,6 +50,13 @@ window.shortenURL = () => {
             document.getElementById("bl-d").innerHTML = `${data.url}`
             document.getElementById('bl-d-hc').style.display = 'flex'
             document.getElementById("bl-d-hc").innerHTML = `Visit https://bingus.link/hits/${data.urlCode} for analytics.`
+            document.getElementById('bl-f').style.display = 'none'
+        } else if (res.status == 400 && data.error == 'invalidURLCode' ) {
+            document.getElementById("bl-btn-h").onclick = () => window.resetPage();
+            document.getElementById("bl-btn-h").innerHTML = "Try Again"
+            document.getElementById("bl-btn-h").style.display = 'flex'
+            document.getElementById("bl-t").innerHTML = "Invalid URL Code"
+            document.getElementById("bl-d").innerHTML = `That short URL is already in use!`
             document.getElementById('bl-f').style.display = 'none'
         } else {
             document.getElementById("bl-btn-h").onclick = () => window.resetPage();
