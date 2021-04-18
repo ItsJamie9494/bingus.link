@@ -15,6 +15,16 @@ body, html {
     flex-direction: column;
 }
 
+#bl-txt {
+    height: 100%;
+    border-radius: 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #bl {
     width: 100vw;
     height: calc(100vh - 40px);
@@ -24,6 +34,12 @@ body, html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#bl-d-txt {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #bl-ftr {
@@ -82,6 +98,13 @@ p {
     margin-top: -6px;
     margin-bottom: 28px;
     max-width: 400px;
+}
+
+pre {
+    opacity: 0.5;
+    margin: 0;
+    margin-top: -6px;
+    margin-bottom: 28px;
 }
 
 button {

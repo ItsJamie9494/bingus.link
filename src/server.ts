@@ -33,6 +33,9 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 app.use(express.static(path.resolve('static')))
+app.get('/license', (req: express.Request, res: express.Response) => {
+    res.sendFile(path.resolve('static', 'license.html'))
+})
 app.use('/', redirect)
 app.use('/api/url', url)
 
