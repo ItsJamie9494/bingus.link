@@ -24,6 +24,9 @@ import redirect from './routes/redirect'
 import url from './routes/url'
 
 const app = express()
+app.set('views', path.resolve('templates'))
+app.set('view engine', 'pug')
+
 const port = process.env.PORT || 5000
 
 connection.once('open', () => console.log('✅ Database Connected'))
