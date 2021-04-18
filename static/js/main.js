@@ -20,8 +20,11 @@ document.getElementById('bl-f').addEventListener("submit", (e) => {
 }, true)
 
 window.shortenURL = () => {
-    const formDetails = {
+    let formDetails = {
         longURL: document.getElementById("bl-lu").value
+    }
+    if (document.getElementById('bl-lu-sc').value != "") {
+        formDetails.urlCode = document.getElementById('bl-lu-sc').value
     }
     var formBody = [];
     for (var property in formDetails) {
