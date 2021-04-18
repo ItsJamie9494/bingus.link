@@ -23,6 +23,7 @@ const router = express.Router()
 // @route         GET /:code
 // @description   Redirect to the original URL
 router.get('/:code', async (req: express.Request, res: express.Response ) => {
+    res.header('Access-Control-Allow-Origin', '*')
     try {
         const url = await Url.findOne({
             urlCode: req.params.code
