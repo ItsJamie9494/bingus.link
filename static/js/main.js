@@ -46,8 +46,10 @@ window.shortenURL = () => {
             document.getElementById("bl-btn-h").onclick = () => window.resetPage();
             document.getElementById("bl-btn-h").innerHTML = "Shorten Another URL"
             document.getElementById("bl-btn-h").style.display = 'flex'
-            document.getElementById("bl-t").innerHTML = "URL Shortened!"
+            document.getElementById("bl-t").innerHTML = `URL Shortened!`
             document.getElementById("bl-d").innerHTML = `${data.url}`
+            document.getElementById('bl-d-hc').style.display = 'flex'
+            document.getElementById("bl-d-hc").innerHTML = `Visit https://bingus.link/hits/${data.urlCode} for analytics.`
             document.getElementById('bl-f').style.display = 'none'
         } else {
             document.getElementById("bl-btn-h").onclick = () => window.resetPage();
