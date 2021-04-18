@@ -31,6 +31,8 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
         })
 
         if (url) {
+            url.hitCount = (url.hitCount || 0) + 1;
+            url.save()
             return res.render('shortURL', { url: encodedURLCode })
         } else {
             return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"` })
