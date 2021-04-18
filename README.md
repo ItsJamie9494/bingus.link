@@ -1,9 +1,11 @@
 <div align="center">
-<h1 align="center">bingus.link</h1>
+<h1 align="center"><a href="https://bingus.link">bingus.link</a></h1>
 <p align="center">A free, private URL shortener</p>
 </div>
 
 ---
+
+![bingus.link](screenshot.png)
 
 # License
 
