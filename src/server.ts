@@ -36,6 +36,9 @@ app.use(express.static(path.resolve('static')))
 app.get('/license', (req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve('static', 'license.html'))
 })
+app.get('/privacy', (req: express.Request, res: express.Response) => {
+    res.sendFile(path.resolve('static', 'privacy.html'))
+})
 app.use('/', redirect)
 app.use('/api/url', url)
 
