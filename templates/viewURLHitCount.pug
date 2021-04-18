@@ -1,0 +1,47 @@
+// Copyright (C) 2021 Trevor Thalacker
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    meta(name="viewport",content="width=device-width, initial-scale=1.0")
+    title bingus.link
+    link(rel="apple-touch-icon",sizes="180x180",href="/apple-touch-icon.png")
+    link(rel="icon",type="image/png",sizes="32x32",href="/favicon-32x32.png")
+    link(rel="icon",type="image/png",sizes="16x16",href="/favicon-16x16.png")
+    link(href="/css/main.css",rel="stylesheet")
+body
+    div(id="bl")
+        img(src="/images/bingus.png",id="blgo")
+        h2(id="bl-t") Hits on "
+            span=code
+            span "
+        p(style="margin-bottom:20px") The bingus.link code "
+            span=code
+            span " has been visited
+        p(style="margin:0;font-size:32px;")
+            strong=hits
+        p(style="margin-top:20px") time(s).
+        p If you would like to report abuse of bingus.link, please email us at 
+            code abuse@trevorthalacker.com
+    footer(id="bl-ftr")
+        div(id="bl-ftr-l")
+            p(id="bl-d") Copyright © 2021 Trevor Thalacker
+        
+        div(id="bl-ftr-r")
+            a(href="https://github.com/trevorthalacker/bingus.link",id="bl-d") Source Code
+            a(href="https://trevorthalacker.com" id="bl-d") More Work
+            a(href="/abuse",id="bl-d") Report Abuse
+            a(href="/privacy",id="bl-d") Privacy
