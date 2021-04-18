@@ -25,19 +25,21 @@ const router = express.Router()
 router.get('/:code', async (req: express.Request, res: express.Response ) => {
     res.header('Access-Control-Allow-Origin', '*')
     try {
+        let encodedURLCode = encodeURIComponent(req.params.code)
         const url = await Url.findOne({
-            urlCode: req.params.code
+            urlCode: encodedURLCode
         })
+
         if (url) {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
             return res.redirect(decryptedURL)
         } else {
-            return res.status(404).render('404', { title: '404 | bingus.link', message: `No shortened URL was found for "${req.params.code}"` })
+            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"` })
         }
     }
     catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res.status(500).render('error', { title: 'Server Error | bingus.link', message: err })
+        return res.status(500).render('error', { title: 'Server Error', message: err })
     }
 })
 
