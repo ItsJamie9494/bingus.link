@@ -31,11 +31,12 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
             return res.redirect(decryptedURL)
         } else {
-            return res.status(404).json({ error: 'noURL', message: `No URL found for code ${req.params.code}` })
+            return res.status(404).render('error', { title: '404', message: `No shortened URL was found for ${req.params.code}` })
         }
     }
     catch (err: unknown) {
-        res.status(500).json({ error: 'Server Error', message: `${err}` })
+        console.error(`❌ Server Error: ${err}`)
+        res.status(500).render('error', { title: 'Server Error', message: err })
     }
 })
 
