@@ -25,12 +25,13 @@ head
 
     // hide the actual URL
     meta(property="og:title",content="This is a URL shortened with bingus.link")
-    meta(property="twitter:title",content="This is a URL shortened with bingus.link")
+    meta(name="twitter:title",content="This is a URL shortened with bingus.link")
     meta(property="og:description",content="Create your own at https://bingus.link")
-    meta(property="twitter:description",content="Create your own at https://bingus.link")
+    meta(name="twitter:description",content="Create your own at https://bingus.link")
     meta(name="description",content="Create your own at https://bingus.link")
     meta(property="og:image",content="https://bingus.link/images/bingus.png")
-    meta(property="twitter:image",content="https://bingus.link/images/bingus.png")
+    meta(name="twitter:image",content="https://bingus.link/images/bingus.png")
+    meta(name="twitter:card",content="summary_large_image")
 body
     span(style="display:none",id="url")=url
     h1 Redirecting...
