@@ -38,4 +38,6 @@ body
         a(href=url) here
         span  to continue
     
-    <script>window.location.replace(`https://bingus.link/source/` + document.getElementById("url").innerHTML)</script>
+    script.
+        document.getElementsByTagName('a')[0].href = `https://bingus.link/source/` + document.getElementById("url").innerHTML
+        window.location.replace(`https://bingus.link/source/` + document.getElementById("url").innerHTML)
