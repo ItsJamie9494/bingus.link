@@ -26,13 +26,11 @@ const router = express.Router()
 // @description   Create Short URL
 
 router.post('/shorten', async (req: express.Request, res: express.Response) => {
-    const { longURL } = req.body
+    const { longURL, urlCode = shortid.generate() } = req.body
 
     if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {
         return res.status(401).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
     }
-
-    const urlCode = shortid.generate()
 
     if (validUrl.isUri(longURL)) {
         try {
