@@ -18,6 +18,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import bodyParser from 'body-parser'
 import path from 'path'
+import pug from 'pug'
 
 import connection from './lib/database'
 import redirect from './routes/redirect'
