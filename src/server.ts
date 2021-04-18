@@ -23,6 +23,7 @@ import pug from 'pug'
 import connection from './lib/database'
 import redirect from './routes/redirect'
 import sourceRedirect from './routes/sourceRedirect'
+import contents from './routes/contents'
 import url from './routes/url'
 
 const app = express()
@@ -49,6 +50,7 @@ app.get('/abuse', (req: express.Request, res: express.Response) => {
 })
 app.use('/', redirect)
 app.use('/source', sourceRedirect)
+app.use('/where/', contents)
 app.use('/api/url', url)
 
 
