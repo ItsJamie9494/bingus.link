@@ -1,0 +1,41 @@
+// Copyright (C) 2021 Trevor Thalacker
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    meta(name="viewport",content="width=device-width, initial-scale=1.0")
+    title This is a URL shortened with bingus.link
+    link(rel="apple-touch-icon",sizes="180x180",href="/apple-touch-icon.png")
+    link(rel="icon",type="image/png",sizes="32x32",href="/favicon-32x32.png")
+    link(rel="icon",type="image/png",sizes="16x16",href="/favicon-16x16.png")
+    link(href="/css/main.css",rel="stylesheet")
+
+    // hide the actual URL
+    meta(property="og:title",content="This is a URL shortened with bingus.link")
+    meta(property="twitter:title",content="This is a URL shortened with bingus.link")
+    meta(property="og:description",content="Create your own at https://bingus.link")
+    meta(property="twitter:description",content="Create your own at https://bingus.link")
+    meta(name="description",content="Create your own at https://bingus.link")
+    meta(property="og:image",content="https://bingus.link/images/bingus.png")
+    meta(property="twitter:image",content="https://bingus.link/images/bingus.png")
+body
+    span(style="display:none",id="url")=url
+    h1 Redirecting...
+    p Haven't redirected yet? Click 
+        a(href=url) here
+        span  to continue
+    
+    <script>window.location.replace(document.getElementById("url").innerHTML)</script>
