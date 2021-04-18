@@ -31,12 +31,12 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
             return res.redirect(decryptedURL)
         } else {
-            return res.status(404).render('error', { title: '404', message: `No shortened URL was found for ${req.params.code}` })
+            return res.status(404).render('error', { title: '404 | bingus.link', message: `No shortened URL was found for "${req.params.code}"` })
         }
     }
     catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        res.status(500).render('error', { title: 'Server Error', message: err })
+        res.status(500).render('error', { title: 'Server Error | bingus.link', message: err })
     }
 })
 
