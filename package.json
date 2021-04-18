@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "mongodb-client-encryption": "^1.2.3",
     "mongoose": "^5.12.4",
+    "pug": "^3.0.2",
     "shortid": "^2.2.16",
     "valid-url": "^1.0.9"
   },
