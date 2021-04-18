@@ -95,6 +95,35 @@ body, html {
     color: #000000;
 }
 
+@media screen and (max-width: 500px) {
+    #bl-ftr {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 0;
+    }
+
+    #bl-ftr-l {
+        left: auto;
+        max-height: auto;
+        position: relative;
+    }
+
+    #bl-flr-l * {
+        max-width: fit-content;
+    }
+    
+    #bl-ftr-r {
+        right: auto;
+        max-height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 #blgo {
     height: 52px;
     min-height: 52px;
