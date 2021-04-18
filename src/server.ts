@@ -22,6 +22,7 @@ import pug from 'pug'
 
 import connection from './lib/database'
 import redirect from './routes/redirect'
+import sourceRedirect from './routes/sourceRedirect'
 import url from './routes/url'
 
 const app = express()
@@ -44,6 +45,7 @@ app.get('/privacy', (req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve('static', 'privacy.html'))
 })
 app.use('/', redirect)
+app.use('/source', sourceRedirect)
 app.use('/api/url', url)
 
 
