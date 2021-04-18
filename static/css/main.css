@@ -148,6 +148,10 @@ button {
     transition: 0.2s all;
 }
 
+#bl-btn-h {
+    display: none;
+}
+
 button:hover {
     border: 2px solid #256EF5;
     background-color: transparent;
