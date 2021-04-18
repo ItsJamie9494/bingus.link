@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link href="/css/main.css" rel="stylesheet" />
-    <script src="/js/main.js"></script>
     <script async defer data-domain="bingus.link" src="https://analytics.trevorthalacker.com/js/plausible.outbound-links.js"></script>
 </head>
 <body>
@@ -16,8 +15,12 @@
         <img src="/images/bingus.png" id="blgo" />
         <h2 id="bl-t">bingus.link</h2>
         <p id="bl-d">A free, private URL shortener with the greatest domain in existence.</p>
-        <textarea id="bl-ta" placeholder="Enter your feedback" maxlength="255"></textarea>
-        <button id="bl-btn" onclick="window.sendFeedback()">
+
+        <form id="bl-f">
+            <label for="bl-lu">URL to Shorten</label>
+            <input type="text" id="bl-lu" placeholder="https://example.com" maxlength="255"></input>
+        </form>
+        <button id="bl-btn" onclick="window.shortenURL()">
             Generate URL
         </button>
     </div>
@@ -33,5 +36,7 @@
             <a href="/privacy" id="bl-d">Privacy</a>
         </div>
     </footer>
+
+    <script src="/js/main.js"></script>
 </body>
 </html>

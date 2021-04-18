@@ -80,7 +80,12 @@ body, html {
     margin: 0 auto;
 }
 
-textarea {
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=text] {
     width: 100%;
     max-width: 468px;
     resize: none;
@@ -89,7 +94,13 @@ textarea {
     border: none;
     border-radius: 6px;
     font-family: inherit;
-    padding: 16px;
+    padding: 10px;
+}
+
+label {
+    opacity: 0.5;
+    text-align: left;
+    padding-bottom: 5px;
 }
 
 p {

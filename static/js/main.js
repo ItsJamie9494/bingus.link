@@ -1,48 +1,45 @@
-window.feedbackDone = false;
+window.shortenURL = () => {
+    const formDetails = {
+        longURL: document.getElementById("bl-lu").value
+    }
+    var formBody = [];
+    for (var property in formDetails) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(formDetails[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
 
-        window.sendFeedback = () => {
-            if(window.feedbackDone == true) {
-                return window.close()
-            }
-
-            const urlParams = new URLSearchParams(window.location.search);
-
-            const products = {
-                dot: "Dot Browser"
-            }
-
-            fetch("/feedback/send", { 
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    product: products[urlParams.get("product")],
-                    version: urlParams.get("version"),
-                    channel: urlParams.get("channel"),
-                    feedback: document.getElementById("fb-ta").value
-                })
-            }).then(res => {
-                if(res.status == 200) {
-                    document.getElementById("fb-m").style.display = "";
-                    document.getElementById("fb-ta").style.display = "none";
-                    document.getElementById("fb-btn").style.display = "none";
-                    document.getElementById("fb-t").innerHTML = "Thank you"
-                    document.getElementById("fb-d").innerHTML = `Thank you for taking the time to improve ${products[urlParams.get("product")]}!`
-
-                    window.feedbackDone = true;
-                } else {
-                    document.getElementById("fb-m").style.display = "none";
-                    document.getElementById("fb-ta").style.display = "none";
-                    document.getElementById("fb-btn").style.display = "none";
-                    document.getElementById("fb-t").innerHTML = "Error"
-                    document.getElementById("fb-d").innerHTML = `Failed to send feedback. Please let a maintainer know!` 
-                }
-            }).catch(res => {
-                document.getElementById("fb-m").style.display = "none";
-                document.getElementById("fb-ta").style.display = "none";
-                document.getElementById("fb-btn").style.display = "none";
-                document.getElementById("fb-t").innerHTML = "Error"
-                document.getElementById("fb-d").innerHTML = `Failed to send feedback. Please let a maintainer know!` 
-            })
+    fetch("/api/url/shorten", { 
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formBody
+    }).then(async res => {
+        if(res.status == 200) {
+            const data = await res.json();
+            document.getElementById("bl-btn").onclick = () => window.resetPage();
+            document.getElementById("bl-btn").innerHTML = "Shorten Another URL"
+            document.getElementById("bl-t").innerHTML = "URL Shortened!"
+            document.getElementById("bl-d").innerHTML = `${data.url}`
+            document.getElementById('bl-f').style.display = 'none'
+        } else {
+            document.getElementById("bl-btn").onclick = () => window.resetPage();
+            document.getElementById("bl-btn").innerHTML = "Try Again"
+            document.getElementById("bl-t").innerHTML = "Something went wrong"
+            document.getElementById("bl-d").innerHTML = `Please try again later`
+            document.getElementById('bl-f').style.display = 'none'
         }
+    }).catch(res => {
+        document.getElementById("bl-btn").onclick = () => window.resetPage();
+        document.getElementById("bl-btn").innerHTML = "Try Again"
+        document.getElementById("bl-t").innerHTML = "Something went wrong"
+        document.getElementById("bl-d").innerHTML = `Please try again later`
+        document.getElementById('bl-f').style.display = 'none'
+    })
+}
+
+window.resetPage = () => {
+    window.location.reload()
+}
