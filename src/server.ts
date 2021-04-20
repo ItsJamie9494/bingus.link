@@ -62,6 +62,13 @@ app.use('/where/', contents)
 app.use('/hits/', hitCounts)
 app.use('/api/url', url)
 
+// Error Pages
+app.use((req: express.Request, res: express.Response) => {
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+    res.status(404)
+    res.sendFile(path.resolve('static', '404.html'))
+})
+
 
 app.listen(port, () => {
     console.log(`🚀 Server Started, listening on port ${port}`)
