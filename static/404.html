@@ -1,13 +1,16 @@
 <!-- 
 Copyright (C) 2021 Trevor Thalacker
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
+
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
@@ -31,20 +34,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link href="/css/main.css" rel="stylesheet" />
-    <script src="/js/main.js"></script>
     <script async defer data-domain="bingus.link" src="https://analytics.trevorthalacker.com/js/plausible.outbound-links.js"></script>
 </head>
 <body>
     <div id="bl">
         <img src="/images/bingus.png" id="blgo" />
-      <h2 id="bl-t">You've reached the 404</h2>
-      <p id="bl-d-txt">How you got here is a mystery. Let's get you back.</p>
-      <button id="bl-btn-h">
+        <h2 id="bl-t">You've reached the 404</h2>
+        <p id="bl-d">How you got here is a mystery. Let's get you back.</p>
         <a href="/">
-            Go Back
+            <button id="bl-btn">
+                Go Back
+            </button>
         </a>
-      </button>
-      <footer id="bl-ftr">
+    </div>
+    <footer id="bl-ftr">
         <div id="bl-ftr-l">
             <p id="bl-d">Copyright © 2021 Trevor Thalacker</p>
         </div>
@@ -56,5 +59,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             <a href="/privacy" id="bl-d">Privacy</a>
         </div>
     </footer>
+
+    <script src="/js/main.js"></script>
 </body>
 </html>
