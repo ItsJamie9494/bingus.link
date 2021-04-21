@@ -6,3 +6,5 @@ const apiRateLimit = rateLimit({
     message: { error: 'rateLimited', message: 'You have been rate limited. Please try again in 1 hour', status: 429 },
     statusCode: 429
 })
+
+export default apiRateLimit

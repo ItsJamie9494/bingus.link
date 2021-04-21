@@ -58,6 +58,13 @@ window.shortenURL = () => {
             document.getElementById("bl-t").innerHTML = "Invalid URL Code"
             document.getElementById("bl-d").innerHTML = `That short URL is already in use!`
             document.getElementById('bl-f').style.display = 'none'
+        } else if (res.status == 429 && data.error == 'rateLimited' ) {
+            document.getElementById("bl-btn-h").onclick = () => window.resetPage();
+            document.getElementById("bl-btn-h").innerHTML = "Try Again"
+            document.getElementById("bl-btn-h").style.display = 'flex'
+            document.getElementById("bl-t").innerHTML = "Rate Limited"
+            document.getElementById("bl-d").innerHTML = `You have been rate limited. Please try again in 1 hour.`
+            document.getElementById('bl-f').style.display = 'none'
         } else {
             document.getElementById("bl-btn-h").onclick = () => window.resetPage();
             document.getElementById("bl-btn-h").innerHTML = "Try Again"

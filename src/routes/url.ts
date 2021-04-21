@@ -19,12 +19,13 @@ import shortid from 'shortid'
 
 import Url from '../models/UrlModel'
 import { encrypt } from '../lib/crypto'
+import apiRateLimit from '../lib/ratelimit'
 
 const router = express.Router()
 
 // @route         POST /api/url/shorten
 // @description   Create Short URL
-router.post('/shorten', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     
