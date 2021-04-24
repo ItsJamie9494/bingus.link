@@ -24,6 +24,11 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
     res.header('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
 
+    // Verify that query is valid
+    if (req.query.longURL === undefined) {
+        return res.render('generateLink/error')
+    }
+
     let baseURL = process.env.baseURL || 'http://localhost:5000'
 
     let formBody = [];
