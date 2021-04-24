@@ -20,6 +20,7 @@ import shortid from 'shortid'
 import Url from '../models/UrlModel'
 import { encrypt } from '../lib/crypto'
 import apiRateLimit from '../lib/ratelimit'
+import { verifyProtocol } from '../lib/url'
 
 const router = express.Router()
 
@@ -35,7 +36,9 @@ router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.
         return res.status(500).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
     }
 
-    if (validUrl.isUri(longURL)) {
+    let verifiedURL = verifyProtocol(longURL)
+
+    if (validUrl.isUri(verifiedURL)) {
         try {
             if (await Url.findOne({
                 urlCode: urlCode
@@ -47,7 +50,7 @@ router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.
 
             let url = new Url({
                 urlCode: encodeURIComponent(urlCode),
-                longURL: JSON.stringify(encrypt(longURL)),
+                longURL: JSON.stringify(encrypt(verifiedURL)),
                 shortURL,
                 date: new Date()
             })
