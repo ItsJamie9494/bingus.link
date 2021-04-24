@@ -26,6 +26,7 @@ import sourceRedirect from './routes/sourceRedirect'
 import contents from './routes/contents'
 import hitCounts from './routes/hitCounts'
 import url from './routes/url'
+import generateLink from './routes/ui/generateLink'
 
 const app = express()
 app.set('views', path.resolve('templates'))
@@ -57,6 +58,7 @@ app.get('/abuse', (req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve('static', 'abuse.html'))
 })
 app.use('/', redirect)
+app.use('/app/', generateLink)
 app.use('/source', sourceRedirect)
 app.use('/where/', contents)
 app.use('/hits/', hitCounts)
