@@ -43,11 +43,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         <p id="bl-d">A free, private URL shortener with the greatest domain in existence.</p>
         <p id="bl-d-hc"></p>
 
-        <form id="bl-f">
+        <form id="bl-f" action="/app/generateLink" method="GET">
             <label for="bl-lu">URL to Shorten</label>
-            <input type="text" id="bl-lu" placeholder="https://example.com" maxlength="255"></input>
+            <input type="text" name="longURL" id="bl-lu" placeholder="https://example.com" maxlength="255"></input>
             <label for="bl-lu-sc">URL Short Code (Optional)</label>
-            <input type="text" id="bl-lu-sc" placeholder="notARickRoll" maxlength="255"></input>
+            <input type="text" name="shortCode" id="bl-lu-sc" placeholder="notARickRoll" maxlength="255"></input>
             <button type="submit" id="bl-btn">
                 Generate URL
             </button>
@@ -68,7 +68,5 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             <a href="/privacy" id="bl-d">Privacy</a>
         </div>
     </footer>
-
-    <script src="/js/main.js"></script>
 </body>
 </html>
