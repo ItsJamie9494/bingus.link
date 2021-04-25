@@ -30,47 +30,46 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
             hCaptchaResponse: req.query['g-recaptcha-response']
         }).then((axiosRes: AxiosResponse) => {
             // Successful Response
+            // Verify that query is valid
+            if (req.query.longURL === undefined) {
+                return res.render('generateLink/error')
+            }
+
+            let baseURL = process.env.baseURL || 'http://localhost:5000'
+
+            let formBody = [];
+            formBody.push('longURL=' + req.query.longURL)
+            if (req.query.urlCode) {
+                formBody.push('urlCode=' + req.query.urlCode)
+            }
+            let parsedFormBody = formBody.join("&");
+
+            axios.post(`${baseURL}/api/url/shorten`, parsedFormBody, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((axiosRes: AxiosResponse) => {
+                if (axiosRes.status === 200) {
+                    console.log('✅ User Successfuly Created Link')
+                    return res.render('generateLink/success', { url: axiosRes.data.url, urlCode: axiosRes.data.urlCode })
+                } else if (axiosRes.status == 400 && axiosRes.data.error == 'invalidURLCode') {
+                    console.error('❌ User Invalid URL Code')
+                    return res.render('generateLink/invalidUrlCode')
+                } else if (axiosRes.status == 429 && axiosRes.data.error == 'rateLimited') {
+                    console.error('❌ User Rate Limited')
+                    return res.render('generateLink/rateLimit')
+                } else {
+                    console.error(`❌ Unknown Error, ${axiosRes}`)
+                    return res.render('generateLink/error')
+                }
+            }).catch((err: AxiosError) => {
+                console.error(`❌ Axios Request Error: ${err}`)
+                return res.render('generateLink/error')
+            })
         }).catch((err: AxiosError) => {
             return res.render('generateLink/hCaptchaError')
         })
     }
-
-    // Verify that query is valid
-    if (req.query.longURL === undefined) {
-        return res.render('generateLink/error')
-    }
-
-    let baseURL = process.env.baseURL || 'http://localhost:5000'
-
-    let formBody = [];
-    formBody.push('longURL=' + req.query.longURL)
-    if (req.query.urlCode) {
-        formBody.push('urlCode=' + req.query.urlCode)
-    }
-    let parsedFormBody = formBody.join("&");
-
-    axios.post(`${baseURL}/api/url/shorten`, parsedFormBody, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }).then((axiosRes: AxiosResponse) => {
-        if (axiosRes.status === 200) {
-            console.log('✅ User Successfuly Created Link')
-            res.render('generateLink/success', { url: axiosRes.data.url, urlCode: axiosRes.data.urlCode })
-        } else if (axiosRes.status == 400 && axiosRes.data.error == 'invalidURLCode') {
-            console.error('❌ User Invalid URL Code')
-            res.render('generateLink/invalidUrlCode')
-        } else if (axiosRes.status == 429 && axiosRes.data.error == 'rateLimited') {
-            console.error('❌ User Rate Limited')
-            res.render('generateLink/rateLimit')
-        } else {
-            console.error(`❌ Unknown Error, ${axiosRes}`)
-            res.render('generateLink/error')
-        }
-    }).catch((err: AxiosError) => {
-        console.error(`❌ Axios Request Error: ${err}`)
-        res.render('generateLink/error')
-    })
 })
 
 export default router

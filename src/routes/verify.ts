@@ -39,10 +39,10 @@ router.post('/', async (req: express.Request, res: express.Response ) => {
             let data = axiosRes.data
             if (data.success === true) {
                 console.log('✅ hCaptcha Verified')
-                res.json({ success: 'hCaptchaVerified', message: 'hCaptcha Successfully Verified', timestamp: data.timestamp })
+                return res.json({ success: 'hCaptchaVerified', message: 'hCaptcha Successfully Verified', timestamp: data.timestamp })
             } else {
                 console.error(`❌ hCaptcha Failed`)
-                res.json({ error: 'hCaptchaFailed', message: 'hCaptcha Verification Failed', timestamp: data.timestamp })
+                return res.json({ error: 'hCaptchaFailed', message: 'hCaptcha Verification Failed', timestamp: data.timestamp })
             }
         }).catch((err: AxiosError) => {
             console.error(`❌ hCaptcha Error: ${err}`)
