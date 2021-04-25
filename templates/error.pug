@@ -14,25 +14,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 html(lang="en")
-head
-    meta(charset="UTF-8")
-    meta(name="viewport",content="width=device-width, initial-scale=1.0")
-    title=title
-    link(rel="apple-touch-icon",sizes="180x180",href="/apple-touch-icon.png")
-    link(rel="icon",type="image/png",sizes="32x32",href="/favicon-32x32.png")
-    link(rel="icon",type="image/png",sizes="16x16",href="/favicon-16x16.png")
-    link(href="/css/main.css",rel="stylesheet")
+include includes/header.pug
 body
     div(id="bl")
         img(src="/images/bingus.png",id="blgo")
         h2(id="bl-t")=title
         p(id="bl-d")=message
-    footer(id="bl-ftr")
-        div(id="bl-ftr-l")
-            p(id="bl-d") Copyright © 2021 Trevor Thalacker
-        
-        div(id="bl-ftr-r")
-            a(href="https://github.com/trevorthalacker/bingus.link",id="bl-d") Source Code
-            a(href="https://trevorthalacker.com" id="bl-d") More Work
-            a(href="/abuse",id="bl-d") Report Abuse
-            a(href="/privacy",id="bl-d") Privacy
+    include includes/footer.pug
