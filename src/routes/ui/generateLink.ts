@@ -14,7 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import express from 'express'
-import axios, { AxiosAdapter, AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 
 const router = express.Router()
 
@@ -23,6 +23,17 @@ const router = express.Router()
 router.get('/generateLink', async (req: express.Request, res: express.Response ) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
+
+    // Verify hCaptcha
+    if (req.query['g-recaptcha-response']) {
+        axios.post('/verify', {
+            hCaptchaResponse: req.query['g-recaptcha-response']
+        }).then((axiosRes: AxiosResponse) => {
+            // Successful Response
+        }).catch((err: AxiosError) => {
+            return res.render('generateLink/hCaptchaError')
+        })
+    }
 
     // Verify that query is valid
     if (req.query.longURL === undefined) {
@@ -44,7 +55,7 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
         }
     }).then((axiosRes: AxiosResponse) => {
         if (axiosRes.status === 200) {
-            console.error('✅ User Successfuly Created Link')
+            console.log('✅ User Successfuly Created Link')
             res.render('generateLink/success', { url: axiosRes.data.url, urlCode: axiosRes.data.urlCode })
         } else if (axiosRes.status == 400 && axiosRes.data.error == 'invalidURLCode') {
             console.error('❌ User Invalid URL Code')
