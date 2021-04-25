@@ -27,6 +27,7 @@ import contents from './routes/contents'
 import hitCounts from './routes/hitCounts'
 import url from './routes/url'
 import generateLink from './routes/ui/generateLink'
+import hCaptcha from './routes/verify'
 
 const app = express()
 app.set('views', path.resolve('templates'))
@@ -63,6 +64,7 @@ app.use('/source', sourceRedirect)
 app.use('/where/', contents)
 app.use('/hits/', hitCounts)
 app.use('/api/url', url)
+app.use('/verify', hCaptcha)
 
 // Error Pages
 app.use((req: express.Request, res: express.Response) => {
