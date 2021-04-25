@@ -34,7 +34,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link href="/css/main.css" rel="stylesheet" />
+
+    <!-- External Scripts -->
     <script async defer data-domain="bingus.link" src="https://analytics.trevorthalacker.com/js/plausible.outbound-links.js"></script>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
 </head>
 <body>
     <div id="bl">
@@ -48,6 +51,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             <input type="text" name="longURL" id="bl-lu" placeholder="https://example.com" maxlength="255"></input>
             <label for="bl-lu-sc">URL Short Code (Optional)</label>
             <input type="text" name="shortCode" id="bl-lu-sc" placeholder="notARickRoll" maxlength="255"></input>
+            <div class="h-captcha" data-sitekey="8846272f-1513-408f-ae71-dfd537f20da8"></div>
             <button type="submit" id="bl-btn">
                 Generate URL
             </button>

@@ -162,7 +162,6 @@ form {
 }
 
 input[type=text] {
-    width: 100%;
     max-width: 468px;
     resize: none;
     background-color: rgb(243, 243, 243);
@@ -237,4 +236,11 @@ button:focus {
 
 img {
     max-width: 100%;
+}
+
+.h-captcha {
+    padding-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
