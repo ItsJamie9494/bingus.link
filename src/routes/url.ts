@@ -52,6 +52,7 @@ router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.
                 urlCode: encodeURIComponent(urlCode),
                 longURL: JSON.stringify(encrypt(verifiedURL)),
                 shortURL,
+                hitCount: 0,
                 date: new Date()
             })
             await url.save()
