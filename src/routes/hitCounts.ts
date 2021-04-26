@@ -33,7 +33,7 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
         })
 
         if (url) {
-            return res.status(404).render('viewURLHitCount', { code: encodedURLCode, hits: url.hitCount })
+            return res.render('viewURLHitCount', { code: encodedURLCode, hits: url.hitCount })
         } else {
             return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"` })
         }
