@@ -13,7 +13,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-- var title = 'bingus.link'
 html(lang="en")
 include includes/header.pug
 body
@@ -22,11 +21,15 @@ body
         h2(id="bl-t") Where does "
             span=code
             span " go?
-        p The bingus.link code "
+        p The 
+            span=title 
+            span  code "
             span=code
             span " is going to whisk you off to
         a(href=url)=url
         p(style="margin-top:28px") If that sounds cool to you, just click the link above.
-        p If you would like to report abuse of bingus.link, please email us at 
+        p If you would like to report abuse of 
+            span=title 
+            span , please email us at 
             code abuse@trevorthalacker.com
     include includes/footer.pug

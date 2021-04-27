@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-- var title = 'bingus.link'
+// We can either pass a custom title or use the default of bingus.link
 html(lang="en")
 include includes/header.pug
 body
@@ -22,12 +22,16 @@ body
         h2(id="bl-t") Hits on "
             span=code
             span "
-        p(style="margin-bottom:20px") The bingus.link code "
+        p(style="margin-bottom:20px") The 
+            span=title 
+            span  code "
             span=code
             span " has been visited
         p(style="margin:0;font-size:32px;")
             strong=hits
         p(style="margin-top:20px") time(s).
-        p If you would like to report abuse of bingus.link, please email us at 
+        p If you would like to report abuse of 
+            span=title
+            span , please email us at 
             code abuse@trevorthalacker.com
     include includes/footer.pug

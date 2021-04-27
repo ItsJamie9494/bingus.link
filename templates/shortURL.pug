@@ -13,12 +13,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-- var completeURL = 'https://bingus.link/source/' + url
 html(lang="en")
 head
     meta(charset="UTF-8")
     meta(name="viewport",content="width=device-width, initial-scale=1.0")
-    title This is a URL shortened with bingus.link
+    title=title
     link(rel="apple-touch-icon",sizes="180x180",href="/apple-touch-icon.png")
     link(rel="icon",type="image/png",sizes="32x32",href="/favicon-32x32.png")
     link(rel="icon",type="image/png",sizes="16x16",href="/favicon-16x16.png")
@@ -33,10 +32,10 @@ head
     meta(property="og:image",content="https://bingus.link/images/bingus.png")
     meta(name="twitter:image",content="https://bingus.link/images/bingus.png")
     meta(name="twitter:card",content="summary_large_image")
-    meta(http-equiv="refresh",content="1; URL=" + completeURL)
+    meta(http-equiv="refresh",content="1; URL=" + url)
 body
-    span(style="display:none",id="url")=completeURL
+    span(style="display:none",id="url")=url
     h1 Redirecting...
     p Haven't redirected yet? Click 
-        a(href=completeURL) here
+        a(href=url) here
         span  to continue
