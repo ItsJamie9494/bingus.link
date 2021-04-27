@@ -16,7 +16,6 @@
 import express from 'express'
 
 import Url from '../models/UrlModel'
-import { decrypt } from '../lib/crypto'
 
 const router = express.Router()
 
