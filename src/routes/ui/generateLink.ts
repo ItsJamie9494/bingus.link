@@ -24,18 +24,24 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
     res.header('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
 
+    let baseURL = process.env.baseURL || 'http://localhost:5000'
+
     // Verify hCaptcha
     if (req.query['g-recaptcha-response']) {
-        axios.post('/verify', {
+        axios.post(`${baseURL}/verify`, {
             hCaptchaResponse: req.query['g-recaptcha-response']
         }).then((axiosRes: AxiosResponse) => {
+            if (axiosRes.data.error === 'hCaptchaFailed') {
+                return res.render('generateLink/hCaptchaError')
+            }
+
             // Successful Response
             // Verify that query is valid
             if (req.query.longURL === undefined) {
                 return res.render('generateLink/error')
             }
 
-            let baseURL = process.env.baseURL || 'http://localhost:5000'
+            
 
             let formBody = [];
             formBody.push('longURL=' + req.query.longURL)
@@ -67,6 +73,7 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
                 return res.render('generateLink/error')
             })
         }).catch((err: AxiosError) => {
+            console.log(err)
             return res.render('generateLink/hCaptchaError')
         })
     }
