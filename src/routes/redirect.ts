@@ -34,14 +34,14 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
         if (url) {
             url.hitCount = (url.hitCount || 0) + 1;
             url.save()
-            return res.render('shortURL', { url: `${process.env.baseURL}/encodedURLCode`, title: `This is a URL shortened with ${process.env.instanceName}` })
+            return res.render('shortURL', { url: `${process.env.baseURL}/encodedURLCode`, title: `This is a URL shortened with ${process.env.instanceName}`, baseUrl: process.env.baseURL })
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"` })
+            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: process.env.baseURL })
         }
     }
     catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res.status(500).render('error', { title: 'Server Error', message: err })
+        return res.status(500).render('error', { title: 'Server Error', message: err, baseUrl: process.env.baseURL })
     }
 })
 

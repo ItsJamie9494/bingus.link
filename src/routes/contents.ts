@@ -25,6 +25,8 @@ const router = express.Router()
 router.get('/:code', async (req: express.Request, res: express.Response ) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
+
+    let baseURL = process.env.baseURL || 'http://localhost:5000'
     
     try {
         let encodedURLCode = encodeURIComponent(req.params.code)
@@ -34,14 +36,14 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
 
         if (url) {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
-            return res.status(404).render('viewURLContents', { code: encodedURLCode, url: decryptedURL, title: process.env.instanceName })
+            return res.status(404).render('viewURLContents', { code: encodedURLCode, url: decryptedURL, title: process.env.instanceName, baseUrl: baseURL })
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"` })
+            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: baseURL })
         }
     }
     catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res.status(500).render('error', { title: 'Server Error', message: err })
+        return res.status(500).render('error', { title: 'Server Error', message: err, baseUrl: baseURL })
     }
 })
 

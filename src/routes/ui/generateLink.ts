@@ -45,20 +45,20 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
     }).then((axiosRes: AxiosResponse) => {
         if (axiosRes.status === 200) {
             console.error('✅ User Successfuly Created Link')
-            res.render('generateLink/success', { url: axiosRes.data.url, hitsUrl: `${process.env.baseURL}/hits/${axiosRes.data.urlCode}`, title: process.env.instanceName })
+            res.render('generateLink/success', { url: axiosRes.data.url, baseUrl: baseURL, hitsUrl: `${process.env.baseURL}/hits/${axiosRes.data.urlCode}`, title: process.env.instanceName })
         } else if (axiosRes.status == 400 && axiosRes.data.error == 'invalidURLCode') {
             console.error('❌ User Invalid URL Code')
-            res.render('generateLink/invalidUrlCode', { title: process.env.instanceName })
+            res.render('generateLink/invalidUrlCode', { title: process.env.instanceName, baseUrl: baseURL })
         } else if (axiosRes.status == 429 && axiosRes.data.error == 'rateLimited') {
             console.error('❌ User Rate Limited')
-            res.render('generateLink/rateLimit', { title: process.env.instanceName })
+            res.render('generateLink/rateLimit', { title: process.env.instanceName, baseUrl: baseURL })
         } else {
             console.error(`❌ Unknown Error, ${axiosRes}`)
-            res.render('generateLink/error', { title: process.env.instanceName })
+            res.render('generateLink/error', { title: process.env.instanceName, baseUrl: baseURL })
         }
     }).catch((err: AxiosError) => {
         console.error(`❌ Axios Request Error: ${err}`)
-        res.render('generateLink/error', { title: process.env.instanceName })
+        res.render('generateLink/error', { title: process.env.instanceName, baseUrl: baseURL })
     })
 })
 
