@@ -2,7 +2,10 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
-  entry: './src/server.ts',
+  entry: {
+    app: './src/server.ts',
+    embedPreview: './lib/embed.ts',
+  },
   target: 'node',
   mode: 'production',
   devtool: 'source-map',
@@ -19,7 +22,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'app.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   externals: [nodeExternals()],
