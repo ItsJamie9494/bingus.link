@@ -24,15 +24,17 @@ head
     link(href="/css/main.css",rel="stylesheet")
 
     // hide the actual URL
-    meta(property="og:title",content="This is a URL shortened with " + baseUrl)
-    meta(name="twitter:title",content="This is a URL shortened with " + baseUrl)
-    meta(property="og:description",content="Create your own at " + baseUrl)
-    meta(name="twitter:description",content="Create your own at " + baseUrl)
-    meta(name="description",content="Create your own at " + baseUrl)
-    meta(property="og:image",content=baseUrl + "/images/bingus.png")
-    meta(name="twitter:image",content=baseUrl + "/images/bingus.png")
+    meta(property="og:title",content=embedTitle)
+    meta(name="twitter:title",content=embedTitle)
+    meta(property="og:description",content=embedDescription)
+    meta(name="twitter:description",content=embedDescription)
+    meta(name="description",content=embedDescription)
+    meta(property="og:image",content=embedImage)
+    meta(name="twitter:image",content=embedImage)
     meta(name="twitter:card",content="summary_large_image")
-    meta(http-equiv="refresh",content="1; URL=" + url)
+    
+    // Temporarily removed for testing embeds :)
+    // meta(http-equiv="refresh",content="1; URL=" + url)
 body
     span(style="display:none",id="url")=url
     h1 Redirecting...
