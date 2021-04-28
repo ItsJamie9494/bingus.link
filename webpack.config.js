@@ -1,29 +1,57 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
-module.exports = {
-  entry: {
-    app: './src/server.ts',
-    embedPreview: './lib/embed.ts',
+// Return Array of Configurations
+module.exports = [
+  {
+    name: "embedPreview",
+    entry: './lib/embed.ts',
+    target: 'node',
+    mode: 'production',
+    devtool: 'source-map',
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+    externals: [nodeExternals()],
+    output: {
+      filename: 'embedPreview.js',
+      path: path.resolve(__dirname, 'dist'),
+      library: 'embedPreview',
+      libraryTarget: 'window',
+      libraryExport: 'default'
+    },
   },
-  target: 'node',
-  mode: 'production',
-  devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.ts', '.js'],
-  },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  externals: [nodeExternals()],
-}
+  {
+    name: "app",
+    entry: './src/server.ts',
+    target: 'node',
+    mode: 'production',
+    devtool: 'source-map',
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+    externals: [nodeExternals()],
+    output: {
+      filename: 'app.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  }
+];
