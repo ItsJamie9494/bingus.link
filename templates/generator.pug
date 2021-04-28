@@ -33,8 +33,28 @@ body
                     label(for="bl-lu-ed") Embed Description
                     input(type="text",name="embedDescription",id="bl-lu-ed",placeholder="Create your own at " + baseUrl,maxlength="255")
 
-                    label(for="bl-lu-ed") Embed Image
-                    input(type="text",name="embedImage",id="bl-lu-ed",placeholder=baseUrl + "/images/bingus.png",maxlength="255")
+                    label(for="bl-lu-ei") Embed Image
+                    input(type="text",name="embedImage",id="bl-lu-ei",placeholder=baseUrl + "/images/bingus.png",maxlength="255")
+                div(id="bl-f-r")
+                    script.
+                        let title = document.getElementById('bl-lu-et') as HTMLInputElement
+                        let description = document.getElementById('bl-lu-ed') as HTMLInputElement
+                        let image = document.getElementById('bl-lu-ei') as HTMLInputElement
+                        let url = document.getElementsByTagName('title')[0] as HTMLTitleElement
+
+                        title.addEventListener('change', () => onChange())
+                        description.addEventListener('change', () => onChange())
+                        image.addEventListener('change', () => onChange())
+
+                        embedPreview(image.value, title.value, description.value, url.innerHTML)
+
+                        const onChange = () => {
+                            (document.getElementById('embedpreview-title') as HTMLSpanElement).innerHTML = title.value;
+                            (document.getElementById('embedpreview-description') as HTMLSpanElement).innerHTML = description.value;
+                            (document.getElementById('embedpreview-image') as HTMLDivElement).style.backgroundImage = `url(${image.value})`;
+                        }
+                    embedpreview
 
             button(type="submit",id="bl-btn") Generate URL
     include includes/footer.pug
+    script(src=baseUrl + "/js/embed.js") 
