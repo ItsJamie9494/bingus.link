@@ -17,18 +17,10 @@ html(lang="en")
 include includes/header.pug
 body
     include includes/main.pug
-        h2(id="bl-t") Where does "
-            span=code
-            span " go?
-        p The 
-            span=title 
-            span  code "
-            span=code
-            span " is going to whisk you off to
+        h2(id="bl-t") Where does "#{code}" go?
+        p The #{title} code "#{code}" is going to whisk you off to
         a(href=url)=url
         p(style="margin-top:28px") If that sounds cool to you, just click the link above.
-        p If you would like to report abuse of 
-            span=title 
-            span , please email us at 
+        p If you would like to report abuse of #{title}, please email us at 
             code abuse@trevorthalacker.com
     include includes/footer.pug

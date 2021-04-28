@@ -19,9 +19,7 @@ body
     include ../includes/main.pug
         h2(id="bl-t") URL Shortened!
         p(id="bl-d")=url
-        p(id="bl-d") Visit 
-            span=hitsURL
-            span  for analytics
+        p(id="bl-d") Visit #{hitsURL} for analytics
         a(href="/")
             button(id="bl-btn") Shorten Another URL
     include ../includes/footer.pug
