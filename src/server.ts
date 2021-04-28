@@ -41,12 +41,10 @@ connection.on('error', () => console.error('❌ Database Error'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
-app.use(express.static(path.resolve('static'), {
-    setHeaders: function(res: express.Response, path) {
-        res.set('Permissions-Policy', 'interest-cohort=()')
-    }
-}))
-
+app.get('/', (req: express.Request, res: express.Response) => {
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+    res.render('generator', { title: process.env.instanceName, baseUrl: process.env.baseURL })
+})
 app.get('/license', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.render('static/license', { title: process.env.instanceName, baseUrl: process.env.baseURL })
@@ -65,6 +63,12 @@ app.use('/source', sourceRedirect)
 app.use('/where/', contents)
 app.use('/hits/', hitCounts)
 app.use('/api/url', url)
+
+app.use(express.static(path.resolve('static'), {
+    setHeaders: function(res: express.Response, path) {
+        res.set('Permissions-Policy', 'interest-cohort=()')
+    }
+}))
 
 // Error Pages
 app.use((req: express.Request, res: express.Response) => {
