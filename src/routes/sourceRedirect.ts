@@ -36,12 +36,12 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
             return res.redirect(decryptedURL)
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"` })
+            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: process.env.baseURL, btnMessage: 'Create It!' })
         }
     }
     catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res.status(500).render('error', { title: 'Server Error', message: err })
+        return res.status(500).render('error', { title: 'Server Error', message: err, baseUrl: process.env.baseURL })
     }
 })
 

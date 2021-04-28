@@ -14,13 +14,11 @@
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 html(lang="en")
-include includes/header.pug
+include ../includes/header.pug
 body
-    include includes/main.pug
-        h2(id="bl-t") Where does "#{code}" go?
-        p The #{title} code "#{code}" is going to whisk you off to
-        a(href=url)=url
-        p(style="margin-top:28px") If that sounds cool to you, just click the link above.
-        p If you would like to report abuse of #{title}, please email us at 
-            code abuse@trevorthalacker.com
-    include includes/footer.pug
+    include ../includes/main.pug
+        h2(id="bl-t") Report Abuse
+        p(id="bl-d-txt") We don’t tolerate spam, malware, viruses, or anything else with #{title}. If you see anything bad, please report it to #[code abuse@trevorthalacker.com].
+        p(id="bl-d-txt") Please make sure to specify the #[strong Full URL] (https://example.com), the #[strong Shortened URL] (https://bingus.link/notARickRoll), and #[strong the content you would like to report].
+
+    include ../includes/footer.pug

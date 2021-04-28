@@ -20,6 +20,7 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import pug from 'pug'
 
+// Routes
 import connection from './lib/database'
 import redirect from './routes/redirect'
 import sourceRedirect from './routes/sourceRedirect'
@@ -40,22 +41,21 @@ connection.on('error', () => console.error('❌ Database Error'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
-app.use(express.static(path.resolve('static'), {
-    setHeaders: function(res: express.Response, path) {
-        res.set('Permissions-Policy', 'interest-cohort=()')
-    }
-}))
+app.get('/', (req: express.Request, res: express.Response) => {
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+    res.render('generator', { title: process.env.instanceName, baseUrl: process.env.baseURL })
+})
 app.get('/license', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.sendFile(path.resolve('static', 'license.html'))
+    res.render('static/license', { title: process.env.instanceName, baseUrl: process.env.baseURL })
 })
 app.get('/privacy', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.sendFile(path.resolve('static', 'privacy.html'))
+    res.render('static/privacy', { title: process.env.instanceName, baseUrl: process.env.baseURL })
 })
 app.get('/abuse', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.sendFile(path.resolve('static', 'abuse.html'))
+    res.render('static/abuse', { title: process.env.instanceName, baseUrl: process.env.baseURL })
 })
 app.use('/', redirect)
 app.use('/app/', generateLink)
@@ -64,11 +64,16 @@ app.use('/where/', contents)
 app.use('/hits/', hitCounts)
 app.use('/api/url', url)
 
+app.use(express.static(path.resolve('static'), {
+    setHeaders: function(res: express.Response, path) {
+        res.set('Permissions-Policy', 'interest-cohort=()')
+    }
+}))
+
 // Error Pages
 app.use((req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.status(404)
-    res.sendFile(path.resolve('static', '404.html'))
+    return res.status(404).render('404', { title: '404', message: `How you got here is a mystery. Let's get you back.`, baseUrl: process.env.baseURL, btnMessage: 'Go Back' })
 })
 
 

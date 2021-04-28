@@ -13,14 +13,5 @@
 //- You should have received a copy of the GNU Affero General Public License
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-html(lang="en")
-include includes/header.pug
-body
-    include includes/main.pug
-        h2(id="bl-t") Where does "#{code}" go?
-        p The #{title} code "#{code}" is going to whisk you off to
-        a(href=url)=url
-        p(style="margin-top:28px") If that sounds cool to you, just click the link above.
-        p If you would like to report abuse of #{title}, please email us at 
-            code abuse@trevorthalacker.com
-    include includes/footer.pug
+div(id="bl-txt")
+    img(src="/images/bingus.png",id="blgo")

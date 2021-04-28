@@ -17,10 +17,12 @@ html(lang="en")
 include includes/header.pug
 body
     include includes/main.pug
-        h2(id="bl-t") Where does "#{code}" go?
-        p The #{title} code "#{code}" is going to whisk you off to
-        a(href=url)=url
-        p(style="margin-top:28px") If that sounds cool to you, just click the link above.
-        p If you would like to report abuse of #{title}, please email us at 
-            code abuse@trevorthalacker.com
+        h2(id="bl-t")=title
+        p(id="bl-d") A free, private URL shortener with the greatest domain in existence. :)
+        form(id="bl-f",action="/app/generateLink",method="GET")
+            label(for="bl-lu") URL to Shorten
+            input(type="text",name="longURL",id="bl-lu",placeholder="https://example.com",maxlength="255")
+            label(for="bl-lu-sc") URL Short Code (Optional)
+            input(type="text",name="shortCode",id="bl-lu-sc",placeholder="notARickRoll",maxlength="255")
+            button(type="submit",id="bl-btn") Generate URL
     include includes/footer.pug

@@ -1,33 +1,27 @@
-// Copyright (C) 2021 Trevor Thalacker
+//- Copyright (C) 2021 Trevor Thalacker
 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Affero General Public License as published
-// by the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
+//- This program is free software: you can redistribute it and/or modify
+//- it under the terms of the GNU Affero General Public License as published
+//- by the Free Software Foundation, either version 3 of the License, or
+//- (at your option) any later version.
 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Affero General Public License for more details.
+//- This program is distributed in the hope that it will be useful,
+//- but WITHOUT ANY WARRANTY; without even the implied warranty of
+//- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//- GNU Affero General Public License for more details.
 
-// You should have received a copy of the GNU Affero General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//- You should have received a copy of the GNU Affero General Public License
+//- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-- var title = 'bingus.link'
 html(lang="en")
 include includes/header.pug
 body
-    div(id="bl")
-        img(src="/images/bingus.png",id="blgo")
-        h2(id="bl-t") Hits on "
-            span=code
-            span "
-        p(style="margin-bottom:20px") The bingus.link code "
-            span=code
-            span " has been visited
+    include includes/main.pug
+        h2(id="bl-t") Hits on "#{code}"
+        p(style="margin-bottom:20px") The #{title} code #{code} has been visited
         p(style="margin:0;font-size:32px;")
             strong=hits
         p(style="margin-top:20px") time(s).
-        p If you would like to report abuse of bingus.link, please email us at 
+        p If you would like to report abuse of #{title}, please email us at 
             code abuse@trevorthalacker.com
     include includes/footer.pug

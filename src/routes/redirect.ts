@@ -16,7 +16,6 @@
 import express from 'express'
 
 import Url from '../models/UrlModel'
-import { decrypt } from '../lib/crypto'
 
 const router = express.Router()
 
@@ -35,14 +34,14 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
         if (url) {
             url.hitCount = (url.hitCount || 0) + 1;
             url.save()
-            return res.render('shortURL', { url: encodedURLCode })
+            return res.render('shortURL', { url: `${process.env.baseURL}/source/${encodedURLCode}`, title: `This is a URL shortened with ${process.env.instanceName}`, baseUrl: process.env.baseURL })
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"` })
+            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: process.env.baseURL, btnMessage: 'Create It!' })
         }
     }
     catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res.status(500).render('error', { title: 'Server Error', message: err })
+        return res.status(500).render('error', { title: 'Server Error', message: err, baseUrl: process.env.baseURL })
     }
 })
 

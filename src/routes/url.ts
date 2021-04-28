@@ -65,5 +65,10 @@ router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.
         return res.status(400).json({ error: 'invalidLongURL',  message: 'Invalid Long URL' })
     }
 })
+router.get('/shorten', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+    return res.status(400).json({ error: 'invalidMethod',  message: 'GET is not supported at /api/url/shorten' })
+})
 
 export default router
