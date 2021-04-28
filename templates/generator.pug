@@ -37,10 +37,10 @@ body
                     input(type="text",name="embedImage",id="bl-lu-ei",placeholder=baseUrl + "/images/bingus.png",maxlength="255")
                 div(id="bl-f-r")
                     script.
-                        let title = document.getElementById('bl-lu-et') as HTMLInputElement
-                        let description = document.getElementById('bl-lu-ed') as HTMLInputElement
-                        let image = document.getElementById('bl-lu-ei') as HTMLInputElement
-                        let url = document.getElementsByTagName('title')[0] as HTMLTitleElement
+                        let title = document.getElementById('bl-lu-et')
+                        let description = document.getElementById('bl-lu-ed')
+                        let image = document.getElementById('bl-lu-ei')
+                        let url = document.getElementsByTagName('title')[0]
 
                         title.addEventListener('change', () => onChange())
                         description.addEventListener('change', () => onChange())
@@ -48,10 +48,10 @@ body
 
                         embedPreview(image.value, title.value, description.value, url.innerHTML)
 
-                        const onChange = () => {
-                            (document.getElementById('embedpreview-title') as HTMLSpanElement).innerHTML = title.value;
-                            (document.getElementById('embedpreview-description') as HTMLSpanElement).innerHTML = description.value;
-                            (document.getElementById('embedpreview-image') as HTMLDivElement).style.backgroundImage = `url(${image.value})`;
+                        function onChange() {
+                            document.getElementById('embedpreview-title').innerHTML = title.value;
+                            document.getElementById('embedpreview-description').innerHTML = description.value;
+                            document.getElementById('embedpreview-image').style.backgroundImage = `url(${image.value})`;
                         }
                     embedpreview
 
