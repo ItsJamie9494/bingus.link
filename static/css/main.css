@@ -43,7 +43,7 @@ body, html {
 }
 
 #bl {
-    width: 100vw;
+    width: 95vw;
     height: calc(100vh - 40px);
     border-radius: 6px;
     text-align: center;
@@ -54,7 +54,7 @@ body, html {
 }
 
 #bl-d-txt {
-    max-width: 100%;
+    max-width: 90%;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -102,6 +102,8 @@ body, html {
         justify-content: center;
         align-items: center;
         padding: 0;
+        height: auto;
+        margin-bottom: 20px;
     }
     #bl-ftr-l {
         left: auto;
@@ -111,14 +113,15 @@ body, html {
 
     #bl-flr-l * {
         max-width: fit-content;
+        max-height: auto;
     }
     
     #bl-ftr-r {
         right: auto;
-        max-height: auto;
         position: relative;
         display: flex;
         flex-direction: column;
+        max-height: max-content;
     }
 }
 
@@ -129,6 +132,8 @@ body, html {
         justify-content: center;
         align-items: center;
         padding: 0;
+        margin-bottom: 20px;
+        height: auto;
     }
 
     #bl-ftr-l {
@@ -139,6 +144,7 @@ body, html {
 
     #bl-flr-l * {
         max-width: fit-content;
+        max-height: auto;
     }
     
     #bl-ftr-r {
