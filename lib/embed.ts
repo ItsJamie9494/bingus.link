@@ -14,10 +14,15 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 // This file creates Embed Previews
-const isBrowser = () => typeof window !== "undefined"
 
-if (isBrowser()) {
-    // Window has loaded
+interface createEmbed {
+    embedImage: string,
+    embedTitle: string,
+    embedDescription: string,
+    embedUrl: string
+}
+
+const createEmbed = ({ embedImage, embedTitle, embedDescription, embedUrl }: createEmbed) => {
     let embedPreview = document.getElementsByTagName('embedpreview')[0]
     
     // Create workspace
@@ -26,7 +31,7 @@ if (isBrowser()) {
     let title = document.createElement('span')
     let description = document.createElement('span')
     let url = document.createElement('span')
-
+    
     image.id = "embedpreview-image"
     caption.id = "embedpreview-caption"
     title.id = "embedpreview-title"
@@ -37,16 +42,41 @@ if (isBrowser()) {
     caption.appendChild(title)
     caption.appendChild(description)
     caption.appendChild(url)
-
-    /* 
-        DOM Tree
-        <embedpreview>
-            <div id="image" />
-            <div id="caption">
-                <span id="title">Title</span>
-                <span id="description">Description</span>
-                <span id="url">URL</span>
-            </div>
-        </embedpreview>
-    */
+    
+    // Add Styles
+    let embedPreviewStyles = `
+        border: 1px solid #bec9d0;
+        border-radius: 0.42857em;
+        overflow: hidden;
+    `
+    let embedPreviewImageStyles = `
+        position: absolute;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        text-align: center;
+    `
 }
+
+/* 
+    DOM Tree
+    <embedpreview>
+        <div id="image" />
+        <div id="caption">
+            <span id="title">Title</span>
+            <span id="description">Description</span>
+            <span id="url">URL</span>
+        </div>
+    </embedpreview>
+*/
