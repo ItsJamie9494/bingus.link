@@ -64,6 +64,14 @@ app.use('/where/', contents)
 app.use('/hits/', hitCounts)
 app.use('/api/url', url)
 
+// Render the embed preview script
+if (process.env.NODE_ENV === 'production') {
+    app.get('/js/embed.js', (req: express.Request, res: express.Response) => {
+        res.setHeader('Permissions-Policy', 'interest-cohort=()')
+        res.sendFile(path.resolve('./dist/embedPreview.js'))
+    })
+}
+
 app.use(express.static(path.resolve('static'), {
     setHeaders: function(res: express.Response, path) {
         res.set('Permissions-Policy', 'interest-cohort=()')
