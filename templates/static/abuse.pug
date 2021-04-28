@@ -1,0 +1,24 @@
+//- Copyright (C) 2021 Trevor Thalacker
+
+//- This program is free software: you can redistribute it and/or modify
+//- it under the terms of the GNU Affero General Public License as published
+//- by the Free Software Foundation, either version 3 of the License, or
+//- (at your option) any later version.
+
+//- This program is distributed in the hope that it will be useful,
+//- but WITHOUT ANY WARRANTY; without even the implied warranty of
+//- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//- GNU Affero General Public License for more details.
+
+//- You should have received a copy of the GNU Affero General Public License
+//- along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+html(lang="en")
+include ../includes/header.pug
+body
+    include ../includes/main.pug
+        h2(id="bl-t") Report Abuse
+        p(id="bl-d-txt") We don’t tolerate spam, malware, viruses, or anything else with #{title}. If you see anything bad, please report it to #[code abuse@trevorthalacker.com].
+        p(id="bl-d-txt") Please make sure to specify the #[strong Full URL] (https://example.com), the #[strong Shortened URL] (https://bingus.link/notARickRoll), and #[strong the content you would like to report].
+
+    include ../includes/footer.pug

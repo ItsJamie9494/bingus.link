@@ -57,7 +57,7 @@ app.get('/privacy', (req: express.Request, res: express.Response) => {
 })
 app.get('/abuse', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.sendFile(path.resolve('static', 'abuse.html'))
+    res.render('static/abuse', { title: process.env.instanceName, baseUrl: process.env.baseURL })
 })
 app.use('/', redirect)
 app.use('/app/', generateLink)
