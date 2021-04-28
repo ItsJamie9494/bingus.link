@@ -165,6 +165,8 @@ body, html {
 form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 input[type=text] {
@@ -183,10 +185,11 @@ label {
     opacity: 0.5;
     text-align: left;
     padding-bottom: 5px;
+    margin-top: 10px;
 }
 
-label[for=bl-lu-sc] {
-    margin-top: 10px;
+label[for=bl-lu] {
+    margin-top: -10px;
 }
 
 p {
@@ -243,4 +246,23 @@ button:focus {
 
 img {
     max-width: 100%;
+}
+
+#bl-f-f {
+    display: flex;
+    flex-direction: row;
+}
+
+#bl-f-l {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+#bl-f-r {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-left: 10px;
 }

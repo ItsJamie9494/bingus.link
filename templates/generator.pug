@@ -18,11 +18,23 @@ include includes/header.pug
 body
     include includes/main.pug
         h2(id="bl-t")=title
-        p(id="bl-d") A free, private URL shortener with the greatest domain in existence. :)
+        p(id="bl-d") A free, private URL shortener with the greatest domain in existence.
         form(id="bl-f",action="/app/generateLink",method="GET")
-            label(for="bl-lu") URL to Shorten
-            input(type="text",name="longURL",id="bl-lu",placeholder="https://example.com",maxlength="255")
-            label(for="bl-lu-sc") URL Short Code (Optional)
-            input(type="text",name="shortCode",id="bl-lu-sc",placeholder="notARickRoll",maxlength="255")
+            div(id="bl-f-f")
+                div(id="bl-f-l")
+                    label(for="bl-lu") URL to Shorten
+                    input(type="text",name="longURL",id="bl-lu",placeholder="https://example.com",maxlength="255")
+                    label(for="bl-lu-sc") URL Short Code (Optional)
+                    input(type="text",name="shortCode",id="bl-lu-sc",placeholder="notARickRoll",maxlength="255")
+                div(id="bl-f-r")
+                    label(for="bl-lu-et") Embed Title
+                    input(type="text",name="embedTitle",id="bl-lu-et",placeholder="This is a URL shortened with " + title,maxlength="255")
+
+                    label(for="bl-lu-ed") Embed Description
+                    input(type="text",name="embedDescription",id="bl-lu-ed",placeholder="Create your own at " + baseUrl,maxlength="255")
+
+                    label(for="bl-lu-ed") Embed Image
+                    input(type="text",name="embedImage",id="bl-lu-ed",placeholder=baseUrl + "/images/bingus.png",maxlength="255")
+
             button(type="submit",id="bl-btn") Generate URL
     include includes/footer.pug
