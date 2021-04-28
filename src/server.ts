@@ -49,7 +49,7 @@ app.use(express.static(path.resolve('static'), {
 
 app.get('/license', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.sendFile(path.resolve('static', 'license.html'))
+    res.render('static/license', { title: process.env.instanceName, baseUrl: process.env.baseURL })
 })
 app.get('/privacy', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
