@@ -38,7 +38,7 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
             return res.status(404).render('viewURLContents', { code: encodedURLCode, url: decryptedURL, title: process.env.instanceName, baseUrl: baseURL })
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: baseURL })
+            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: process.env.baseURL, btnMessage: 'Create It!' })
         }
     }
     catch (err: unknown) {

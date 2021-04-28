@@ -36,7 +36,7 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
         if (url) {
             return res.render('viewURLHitCount', { code: encodedURLCode, hits: url.hitCount, title: process.env.instanceName, baseUrl: baseURL })
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: baseURL })
+            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: process.env.baseURL, btnMessage: 'Create It!' })
         }
     }
     catch (err: unknown) {
