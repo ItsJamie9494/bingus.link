@@ -32,9 +32,8 @@ head
     meta(property="og:image",content=embedImage)
     meta(name="twitter:image",content=embedImage)
     meta(name="twitter:card",content="summary_large_image")
-    
-    // Temporarily removed for testing embeds :)
-    // meta(http-equiv="refresh",content="1; URL=" + url)
+
+    meta(http-equiv="refresh",content="1; URL=" + url)
 body
     span(style="display:none",id="url")=url
     h1 Redirecting...
