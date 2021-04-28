@@ -33,8 +33,19 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
 
     let formBody = [];
     formBody.push('longURL=' + req.query.longURL)
+    // I know there is a better way to do this but I haven't found it yet
+    // TODO clean this up
     if (req.query.urlCode) {
         formBody.push('urlCode=' + req.query.urlCode)
+    }
+    if (req.query.embedTitle) {
+        formBody.push('embedTitle=' + req.query.embedTitle)
+    }
+    if (req.query.embedDescription) {
+        formBody.push('embedDescription=' + req.query.embedDescription)
+    }
+    if (req.query.embedImage) {
+        formBody.push('embedImage=' + req.query.embedImage)
     }
     let parsedFormBody = formBody.join("&");
 

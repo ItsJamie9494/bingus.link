@@ -21,6 +21,7 @@ import Url from '../models/UrlModel'
 import { encrypt } from '../lib/crypto'
 import apiRateLimit from '../lib/ratelimit'
 import { verifyProtocol } from '../lib/url'
+import { EmbedInterface } from '../interfaces/EmbedInterface'
 
 const router = express.Router()
 
@@ -30,7 +31,13 @@ router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     
-    const { longURL, urlCode = shortid.generate() } = req.body
+    const { 
+        longURL,
+        urlCode = shortid.generate(),
+        embedTitle = `This is a URL shortened with ${process.env.instanceName}`,
+        embedDescription = `Create your own at ${process.env.baseURL}`,
+        embedImage = `${process.env.baseURL}/images/bingus.png`
+    } = req.body
 
     if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {
         return res.status(500).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
@@ -48,11 +55,18 @@ router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.
 
             const shortURL = process.env.baseURL + '/' + urlCode
 
+            const embedInfo: EmbedInterface = {
+                title: encrypt(embedTitle),
+                description: encrypt(embedDescription),
+                image: encrypt(embedImage),
+            }
+
             let url = new Url({
                 urlCode: encodeURIComponent(urlCode),
                 longURL: JSON.stringify(encrypt(verifiedURL)),
                 shortURL,
                 hitCount: 0,
+                embedInfo: JSON.stringify(embedInfo),
                 date: new Date()
             })
             await url.save()
