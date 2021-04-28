@@ -36,7 +36,12 @@ body
                     label(for="bl-lu-ei") Embed Image
                     input(type="text",name="embedImage",id="bl-lu-ei",placeholder=baseUrl + "/images/bingus.png",maxlength="255")
                 div(id="bl-f-r")
-                    script.
+                    embedpreview
+
+            button(type="submit",id="bl-btn") Generate URL
+    include includes/footer.pug
+    script(src=baseUrl + "/js/embed.js") 
+    script.
                         let title = document.getElementById('bl-lu-et')
                         let description = document.getElementById('bl-lu-ed')
                         let image = document.getElementById('bl-lu-ei')
@@ -46,15 +51,10 @@ body
                         description.addEventListener('change', () => onChange())
                         image.addEventListener('change', () => onChange())
 
-                        embedPreview(image.value, title.value, description.value, url.innerHTML)
+                        window.embedPreview(image.placeholder, title.placeholder, description.placeholder, url.innerHTML)
 
                         function onChange() {
                             document.getElementById('embedpreview-title').innerHTML = title.value;
                             document.getElementById('embedpreview-description').innerHTML = description.value;
                             document.getElementById('embedpreview-image').style.backgroundImage = `url(${image.value})`;
                         }
-                    embedpreview
-
-            button(type="submit",id="bl-btn") Generate URL
-    include includes/footer.pug
-    script(src=baseUrl + "/js/embed.js") 
