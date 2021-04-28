@@ -69,8 +69,7 @@ app.use('/api/url', url)
 // Error Pages
 app.use((req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.status(404)
-    res.sendFile(path.resolve('static', '404.html'))
+    return res.status(404).render('404', { title: '404', message: `How you got here is a mystery. Let's get you back.`, baseUrl: process.env.baseURL, btnMessage: 'Go Back' })
 })
 
 
