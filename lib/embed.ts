@@ -26,11 +26,11 @@ const createEmbed = ({ embedImage, embedTitle, embedDescription, embedUrl }: cre
     let embedPreview = document.getElementsByTagName('embedpreview')[0]
     
     // Create workspace
-    let image = document.createElement('div')
-    let caption = document.createElement('div')
-    let title = document.createElement('span')
-    let description = document.createElement('span')
-    let url = document.createElement('span')
+    let image = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-image')
+    let caption = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-caption')
+    let title = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-title')
+    let description = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-description')
+    let url = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-url')
     
     image.id = "embedpreview-image"
     caption.id = "embedpreview-caption"
@@ -54,6 +54,7 @@ const createEmbed = ({ embedImage, embedTitle, embedDescription, embedUrl }: cre
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
+        background-image: url(${embedImage});
         width: 100%;
         height: 100%;
         top: 0;
@@ -66,6 +67,74 @@ const createEmbed = ({ embedImage, embedTitle, embedDescription, embedUrl }: cre
         -webkit-box-pack: center;
         justify-content: center;
         text-align: center;
+    `
+
+    let embedPreviewCaptionStyles = `
+        text-align: left;
+        padding: 0.75em;
+        padding-right: 0.75em;
+        padding-left: 0.75em;
+        padding-left: 1em;
+        padding-right: 1em;
+    `
+
+    let embedPreviewTitleStyles = `
+        font-weight: bold;
+        margin: 0 0 0.15em;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        line-height: 18.2px;
+        color: #000;
+    `
+
+    let embedPreviewDescriptionStyles = `
+        margin: 0 0 0.15em;
+        font-size: 14px;
+        line-height: 18px;
+        max-height: 36px;
+        overflow: hidden;
+        font-size: 14px;
+        line-height: 18.2px;
+        color: #000;
+    `
+
+    let embedPreviewURLStyles = `
+        color: #899aa6 !important;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        line-height: 18.2px;
+    `
+
+    let stylesheet = `
+        embedpreview {
+            ${embedPreviewStyles}
+        }
+
+        embedpreview-image {
+            ${embedPreviewImageStyles}
+        }
+
+        embedpreview-caption {
+            ${embedPreviewCaptionStyles}
+        }
+
+        embedpreview-title {
+            ${embedPreviewTitleStyles}
+        }
+
+        embedpreview-description {
+            ${embedPreviewDescriptionStyles}
+        }
+
+        embedpreview-url {
+            ${embedPreviewURLStyles}
+        }
     `
 }
 
