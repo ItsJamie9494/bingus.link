@@ -1,0 +1,34 @@
+//- Copyright (C) 2021 Trevor Thalacker
+
+//- This program is free software: you can redistribute it and/or modify
+//- it under the terms of the GNU Affero General Public License as published
+//- by the Free Software Foundation, either version 3 of the License, or
+//- (at your option) any later version.
+
+//- This program is distributed in the hope that it will be useful,
+//- but WITHOUT ANY WARRANTY; without even the implied warranty of
+//- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//- GNU Affero General Public License for more details.
+
+//- You should have received a copy of the GNU Affero General Public License
+//- along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+html(lang="en")
+include ../includes/header.pug
+body
+    include ../includes/main.pug
+        h2(id="bl-t") #{title} Privacy Policy
+        p(id="bl-d-txt") This policy extends upon the policy featured at #[a(href="https://trevorthalacker.com/legal/privacy") https://trevorthalacker.com/legal/privacy].
+        p(id="bl-d-txt").
+            When you create a short URL, we do not collect any information about the Short URL in any form. The destination URL is encrypted, and is only decrypted upon trying to visit the short URL page.
+            cannot view the short URL destination page, and there are no analytics, nor any other forms of tracking on short URL pages.
+            #[br]#[br]
+            Short URL destination pages are not controlled by us, and may be subject to their own policies.
+            #[br]#[br]
+            All information in our database is completely anonymous, and we cannot determine who created the Short URL, nor any other information. The only information we have is the Date and Time of creation.
+            #[br]#[br]
+            If you have any questions about this policy, please do not hesitate to contact us at #[a(href="mailto:privacy@trevorthalacker.com") privacy@trevorthalacker.com].
+            #[br]#[br]
+            If you do not agree to any part of this policy, the only action you can take would be to cease use of this website.
+
+    include ../includes/footer.pug

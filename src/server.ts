@@ -20,6 +20,7 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import pug from 'pug'
 
+// Routes
 import connection from './lib/database'
 import redirect from './routes/redirect'
 import sourceRedirect from './routes/sourceRedirect'
@@ -45,13 +46,14 @@ app.use(express.static(path.resolve('static'), {
         res.set('Permissions-Policy', 'interest-cohort=()')
     }
 }))
+
 app.get('/license', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.sendFile(path.resolve('static', 'license.html'))
 })
 app.get('/privacy', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.sendFile(path.resolve('static', 'privacy.html'))
+    res.render('static/privacy', { title: process.env.instanceName, baseUrl: process.env.baseURL })
 })
 app.get('/abuse', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
