@@ -20,6 +20,7 @@ let embedPreviewStyles = `
     border: 1px solid #bec9d0;
     border-radius: 0.42857em;
     overflow: hidden;
+    width
 `
 const embedPreviewImageStyles = (embedImage: string) => `
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
@@ -62,6 +63,7 @@ let embedPreviewTitleStyles = `
     font-size: 14px;
     line-height: 18.2px;
     color: #000;
+    max-width: 300px;
 `
 
 let embedPreviewDescriptionStyles = `
@@ -73,6 +75,7 @@ let embedPreviewDescriptionStyles = `
     font-size: 14px;
     line-height: 18.2px;
     color: #000;
+    max-width: 300px;
 `
 
 let embedPreviewURLStyles = `
