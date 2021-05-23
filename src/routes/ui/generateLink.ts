@@ -57,19 +57,18 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
         if (axiosRes.status === 200) {
             console.error('✅ User Successfuly Created Link')
             res.render('generateLink/success', { url: axiosRes.data.url, baseUrl: baseURL, hitsUrl: `${process.env.baseURL}/hits/${axiosRes.data.urlCode}`, title: process.env.instanceName })
-        } else if (axiosRes.status == 400 && axiosRes.data.error == 'invalidURLCode') {
+        }
+    }).catch((err: AxiosError) => {
+        if (err.response?.status == 400 && err.response?.data.error == 'invalidURLCode') {
             console.error('❌ User Invalid URL Code')
             res.render('generateLink/invalidUrlCode', { title: process.env.instanceName, baseUrl: baseURL })
-        } else if (axiosRes.status == 429 && axiosRes.data.error == 'rateLimited') {
+        } else if (err.response?.status == 429 && err.response?.data.error == 'rateLimited') {
             console.error('❌ User Rate Limited')
             res.render('generateLink/rateLimit', { title: process.env.instanceName, baseUrl: baseURL })
         } else {
-            console.error(`❌ Unknown Error, ${axiosRes}`)
+            console.error(`❌ Unknown Error, ${err}`)
             res.render('generateLink/error', { title: process.env.instanceName, baseUrl: baseURL })
         }
-    }).catch((err: AxiosError) => {
-        console.error(`❌ Axios Request Error: ${err}`)
-        res.render('generateLink/error', { title: process.env.instanceName, baseUrl: baseURL })
     })
 })
 
