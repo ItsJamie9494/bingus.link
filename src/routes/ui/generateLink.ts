@@ -35,8 +35,8 @@ router.get('/generateLink', async (req: express.Request, res: express.Response )
     formBody.push('longURL=' + req.query.longURL)
     // I know there is a better way to do this but I haven't found it yet
     // TODO clean this up
-    if (req.query.urlCode) {
-        formBody.push('urlCode=' + req.query.urlCode)
+    if (req.query.shortCode) {
+        formBody.push('urlCode=' + req.query.shortCode)
     }
     if (req.query.embedTitle) {
         formBody.push('embedTitle=' + req.query.embedTitle)
