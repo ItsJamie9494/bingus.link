@@ -13,13 +13,16 @@
 //- You should have received a copy of the GNU Affero General Public License
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-html(lang="en")
-include ../includes/header.pug
-body
-    include ../includes/main.pug
-        h2(id="bl-t") #{title} Privacy Policy
-        p(id="bl-d-txt") This policy extends upon the policy featured at #[a(href="https://trevorthalacker.com/legal/privacy") https://trevorthalacker.com/legal/privacy].
-        p(id="bl-d-txt").
+extends ../includes/layout.pug
+
+block content
+    section(class="flex-grow flex flex-col items-center justify-center")
+        div(class="flex flex-col items-center")
+            img(class="h-16 w-16 m-3" src=logo alt=title + " Icon")
+            h1(class="text-2xl") #{title} Privacy Policy
+
+        p(class="text-gray-600 text-lg lg:mx-96 mx-44") This policy extends upon the policy featured at #[a(class="hover:text-blue-600 transition-colors underline" href="https://trevorthalacker.com/legal/privacy") https://trevorthalacker.com/legal/privacy].
+        p(class="text-gray-600 text-sm mt-5 lg:mx-96 mx-44").
             When you create a short URL, we do not collect any information about the Short URL in any form. The destination URL is encrypted, and is only decrypted upon trying to visit the short URL page.
             cannot view the short URL destination page, and there are no analytics, nor any other forms of tracking on short URL pages.
             #[br]#[br]
@@ -27,8 +30,7 @@ body
             #[br]#[br]
             All information in our database is completely anonymous, and we cannot determine who created the Short URL, nor any other information. The only information we have is the Date and Time of creation.
             #[br]#[br]
-            If you have any questions about this policy, please do not hesitate to contact us at #[a(href="mailto:privacy@trevorthalacker.com") privacy@trevorthalacker.com].
+            If you have any questions about this policy, please do not hesitate to contact us at
+                #[a(class="hover:text-blue-600 transition-colors underline" href="mailto:privacy@trevorthalacker.com") privacy@trevorthalacker.com].
             #[br]#[br]
             If you do not agree to any part of this policy, the only action you can take would be to cease use of this website.
-
-    include ../includes/footer.pug
