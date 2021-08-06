@@ -13,12 +13,14 @@
 //- You should have received a copy of the GNU Affero General Public License
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-html(lang="en")
-include ../includes/header.pug
-body
-    include ../includes/main.pug
-        h2(id="bl-t") Something went wrong
-        p(id="bl-d") Please try again later.
-        a(href="/")
-            button(id="bl-btn") Try Again
-    include ../includes/footer.pug
+extends ../includes/layout.pug
+
+block content
+    section(class="flex-grow flex flex-col items-center justify-center")
+        div(class="flex flex-col items-center")
+            img(class="h-16 w-16 m-3" src=logo alt=title + " Icon")
+            h1(class="text-2xl") Something went wrong
+
+        div(class="flex flex-col items-center justify-center")
+            p(class="text-gray-600 text-lg lg:mx-96 mx-44 text-center") Please try again later.
+            a(class="border-2 border-blue-500 rounded-lg px-2 py-1 ml-2 mt-4 hover:border-blue-300 hover:text-gray-500 transition-colors" href="/") Try Again
