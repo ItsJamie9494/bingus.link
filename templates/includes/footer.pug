@@ -13,12 +13,12 @@
 //- You should have received a copy of the GNU Affero General Public License
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-footer(id="bl-ftr")
-    div(id="bl-ftr-l")
-        p(id="bl-d") Copyright © 2021 Trevor Thalacker
-        
-    div(id="bl-ftr-r")
-        a(href="https://github.com/trevorthalacker/bingus.link",id="bl-d") Source Code
-        a(href="https://trevorthalacker.com" id="bl-d") More Work
-        a(href="/abuse",id="bl-d") Report Abuse
-        a(href="/privacy",id="bl-d") Privacy
+footer(class="flex justify-between items-center px-10 py-4 bg-gray-300 text-gray-600 text-sm font-medium")
+    p Copyright © #{new Date().getFullYear()} Trevor Thalacker.
+
+    div
+        +footer-link('https://gitlab.com/trevorthalacker/bingus.link', 'Source Code')
+        +footer-link('https://trevorthalacker.com', 'More Work')
+        +footer-link('/abuse', 'Report Abuse')
+        +footer-link('/terms', 'Terms')
+        +footer-link('/privacy', 'Privacy')

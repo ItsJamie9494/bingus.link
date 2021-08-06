@@ -1,0 +1,42 @@
+//
+ Copyright (C) 2021 Trevor Thalacker.
+ View https://www.gnu.org/licenses/agpl-3.0.html for the full License text
+
+//- This program is free software: you can redistribute it and/or modify
+//- it under the terms of the GNU Affero General Public License as published
+//- by the Free Software Foundation, either version 3 of the License, or
+//- (at your option) any later version.
+
+//- This program is distributed in the hope that it will be useful,
+//- but WITHOUT ANY WARRANTY; without even the implied warranty of
+//- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//- GNU Affero General Public License for more details.
+
+//- You should have received a copy of the GNU Affero General Public License
+//- along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+    meta(property="og:title",content=title)
+    meta(name="twitter:title",content=title)
+    meta(property="og:description",content="A free, private URL shortener with the greatest domain in existence.")
+    meta(name="twitter:description",content="A free, private URL shortener with the greatest domain in existence.")
+    meta(name="description",content="A free, private URL shortener with the greatest domain in existence.")
+    meta(property="og:image",content=baseUrl + "/images/screenshot.png")
+    meta(name="twitter:image",content=baseUrl + "/images/screenshot.png")
+    meta(name="twitter:card",content="summary_large_image")
+    meta(property="twitter:url",content=baseUrl)
+    title=title
+    link(rel="apple-touch-icon",sizes="180x180",href="/apple-touch-icon.png")
+    link(rel="icon",type="image/png",sizes="32x32",href="/favicon-32x32.png")
+    link(rel="icon",type="image/png",sizes="16x16",href="/favicon-16x16.png")
+
+    // temporary, but i need bundled to be the only stylesheet for now
+    //link(href="/css/main.css",rel="stylesheet")
+
+    //- bundled.css is automatically generated
+    link(href="/css/bundled.css", rel="stylesheet")
+
+    script(async,defer,data-domain="bingus.link",src="https://analytics.trevorthalacker.com/js/plausible.outbound-links.js")
