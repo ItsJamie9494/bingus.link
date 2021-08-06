@@ -8,6 +8,7 @@
   "license": "AGPL-3.0",
   "private": true,
   "dependencies": {
+    "autoprefixer": "^10.3.1",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
@@ -40,6 +41,7 @@
   "scripts": {
     "dev": "nodemon ./src/server.ts",
     "build": "webpack",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "css": "postcss tailwind.css -o static/css/bundled.css"
   }
 }
