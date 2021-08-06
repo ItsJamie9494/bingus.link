@@ -16,10 +16,10 @@
 //- LOGO
 //- =============
 - var date = new Date().getMonth() + 1 //- June is 5 in javascript, so we add one to the date
-- var logo = "images/bingus.png"
+- var logo = baseUrl +  "/images/bingus.png"
 
 unless date != 6
-    - var logo="images/rainbow-bingus.png"
+    - var logo = baseUrl + "/images/rainbow-bingus.png"
 
 //- FOOTER LINKS
 //- =============
