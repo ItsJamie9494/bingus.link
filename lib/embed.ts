@@ -88,7 +88,12 @@ let embedPreviewURLStyles = `
     line-height: 18.2px;
 `
 
-export default function createEmbed(embedImage: string, embedTitle: string, embedDescription: string, embedUrl: string) {
+export default function createEmbed(
+    embedImage: string,
+    embedTitle: string,
+    embedDescription: string,
+    embedUrl: string
+) {
     let stylesheet = `
         #embedpreview {
             ${embedPreviewStyles}
@@ -116,25 +121,40 @@ export default function createEmbed(embedImage: string, embedTitle: string, embe
     `
 
     let embedPreview = document.getElementsByTagName('embedpreview')[0]
-    
+
     // Create workspace
-    let image = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-image')
-    let caption = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-caption')
-    let title = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-title')
-    let description = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-description')
-    let url = document.createElementNS("http://www.w3.org/1999/xhtml", 'elementpreview-url')
+    let image = document.createElementNS(
+        'http://www.w3.org/1999/xhtml',
+        'elementpreview-image'
+    )
+    let caption = document.createElementNS(
+        'http://www.w3.org/1999/xhtml',
+        'elementpreview-caption'
+    )
+    let title = document.createElementNS(
+        'http://www.w3.org/1999/xhtml',
+        'elementpreview-title'
+    )
+    let description = document.createElementNS(
+        'http://www.w3.org/1999/xhtml',
+        'elementpreview-description'
+    )
+    let url = document.createElementNS(
+        'http://www.w3.org/1999/xhtml',
+        'elementpreview-url'
+    )
     let styles = document.createElement('style')
 
     styles.innerHTML = stylesheet
 
-    embedPreview.id = "embedpreview"
-    
-    image.id = "embedpreview-image"
-    caption.id = "embedpreview-caption"
-    title.id = "embedpreview-title"
-    description.id = "embedpreview-description"
-    url.id = "embedpreview-url"
-    document.head.append(styles);
+    embedPreview.id = 'embedpreview'
+
+    image.id = 'embedpreview-image'
+    caption.id = 'embedpreview-caption'
+    title.id = 'embedpreview-title'
+    description.id = 'embedpreview-description'
+    url.id = 'embedpreview-url'
+    document.head.append(styles)
     embedPreview.appendChild(image)
     embedPreview.appendChild(caption)
     caption.appendChild(title)

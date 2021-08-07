@@ -20,56 +20,85 @@ const router = express.Router()
 
 // @route         GET /generateLink
 // @description   Generate link and respond with web page
-router.get('/generateLink', async (req: express.Request, res: express.Response ) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+router.get(
+    '/generateLink',
+    async (req: express.Request, res: express.Response) => {
+        res.header('Access-Control-Allow-Origin', '*')
+        res.setHeader('Permissions-Policy', 'interest-cohort=()')
 
-    let baseURL = process.env.baseURL || 'http://localhost:5000'
-    
-    // Verify that query is valid
-    if (req.query.longURL === "" || req.query.longURL === undefined) {
-        return res.render('generateLink/error',{ title: process.env.instanceName, baseUrl: baseURL })
-    }
+        let baseURL = process.env.baseURL || 'http://localhost:5000'
 
-    let formBody = [];
-    formBody.push('longURL=' + req.query.longURL)
-    // I know there is a better way to do this but I haven't found it yet
-    // TODO clean this up
-    if (req.query.shortCode) {
-        formBody.push('urlCode=' + req.query.shortCode)
-    }
-    if (req.query.embedTitle) {
-        formBody.push('embedTitle=' + req.query.embedTitle)
-    }
-    if (req.query.embedDescription) {
-        formBody.push('embedDescription=' + req.query.embedDescription)
-    }
-    if (req.query.embedImage) {
-        formBody.push('embedImage=' + req.query.embedImage)
-    }
-    let parsedFormBody = formBody.join("&");
+        // Verify that query is valid
+        if (req.query.longURL === '' || req.query.longURL === undefined) {
+            return res.render('generateLink/error', {
+                title: process.env.instanceName,
+                baseUrl: baseURL,
+            })
+        }
 
-    axios.post(`${baseURL}/api/url/shorten`, parsedFormBody, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+        let formBody = []
+        formBody.push('longURL=' + req.query.longURL)
+        // I know there is a better way to do this but I haven't found it yet
+        // TODO clean this up
+        if (req.query.shortCode) {
+            formBody.push('urlCode=' + req.query.shortCode)
         }
-    }).then((axiosRes: AxiosResponse) => {
-        if (axiosRes.status === 200) {
-            console.error('✅ User Successfuly Created Link')
-            res.render('generateLink/success', { url: axiosRes.data.url, baseUrl: baseURL, hitsUrl: `${process.env.baseURL}/hits/${axiosRes.data.urlCode}`, title: process.env.instanceName })
+        if (req.query.embedTitle) {
+            formBody.push('embedTitle=' + req.query.embedTitle)
         }
-    }).catch((err: AxiosError) => {
-        if (err.response?.status == 400 && err.response?.data.error == 'invalidURLCode') {
-            console.error('❌ User Invalid URL Code')
-            res.render('generateLink/invalidUrlCode', { title: process.env.instanceName, baseUrl: baseURL })
-        } else if (err.response?.status == 429 && err.response?.data.error == 'rateLimited') {
-            console.error('❌ User Rate Limited')
-            res.render('generateLink/rateLimit', { title: process.env.instanceName, baseUrl: baseURL })
-        } else {
-            console.error(`❌ Unknown Error, ${err}`)
-            res.render('generateLink/error', { title: process.env.instanceName, baseUrl: baseURL })
+        if (req.query.embedDescription) {
+            formBody.push('embedDescription=' + req.query.embedDescription)
         }
-    })
-})
+        if (req.query.embedImage) {
+            formBody.push('embedImage=' + req.query.embedImage)
+        }
+        let parsedFormBody = formBody.join('&')
+
+        axios
+            .post(`${baseURL}/api/url/shorten`, parsedFormBody, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+            .then((axiosRes: AxiosResponse) => {
+                if (axiosRes.status === 200) {
+                    console.error('✅ User Successfuly Created Link')
+                    res.render('generateLink/success', {
+                        url: axiosRes.data.url,
+                        baseUrl: baseURL,
+                        hitsUrl: `${process.env.baseURL}/hits/${axiosRes.data.urlCode}`,
+                        title: process.env.instanceName,
+                    })
+                }
+            })
+            .catch((err: AxiosError) => {
+                if (
+                    err.response?.status == 400 &&
+                    err.response?.data.error == 'invalidURLCode'
+                ) {
+                    console.error('❌ User Invalid URL Code')
+                    res.render('generateLink/invalidUrlCode', {
+                        title: process.env.instanceName,
+                        baseUrl: baseURL,
+                    })
+                } else if (
+                    err.response?.status == 429 &&
+                    err.response?.data.error == 'rateLimited'
+                ) {
+                    console.error('❌ User Rate Limited')
+                    res.render('generateLink/rateLimit', {
+                        title: process.env.instanceName,
+                        baseUrl: baseURL,
+                    })
+                } else {
+                    console.error(`❌ Unknown Error, ${err}`)
+                    res.render('generateLink/error', {
+                        title: process.env.instanceName,
+                        baseUrl: baseURL,
+                    })
+                }
+            })
+    }
+)
 
 export default router

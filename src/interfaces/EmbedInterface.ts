@@ -1,6 +1,6 @@
 // Copyright (C) 2021 Trevor Thalacker
 
-import { HashInterface } from "./HashInterface";
+import { HashInterface } from './HashInterface'
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published
@@ -16,7 +16,7 @@ import { HashInterface } from "./HashInterface";
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 export interface EmbedInterface {
-    title: HashInterface,
-    description: HashInterface,
+    title: HashInterface
+    description: HashInterface
     image: HashInterface
 }

@@ -23,7 +23,7 @@ const URLSchema = new mongoose.Schema({
     embedInfo: String,
     date: {
         type: String,
-        default: Date.now
+        default: Date.now,
     },
 })
 

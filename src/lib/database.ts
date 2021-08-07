@@ -20,12 +20,13 @@ const PASSWORD = process.env.DB_PASSWORD
 const HOST = process.env.DB_HOST
 const DB = process.env.DB
 
-const DB_URI = `mongodb+srv://${USER}:${encodeURIComponent(PASSWORD || '')}@${HOST}/${DB}?retryWrites=true&w=majority`
-
+const DB_URI = `mongodb+srv://${USER}:${encodeURIComponent(
+    PASSWORD || ''
+)}@${HOST}/${DB}?retryWrites=true&w=majority`
 
 mongoose.connect(DB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 })
 
 const connection = mongoose.connection

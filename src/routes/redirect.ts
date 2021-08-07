@@ -22,18 +22,18 @@ const router = express.Router()
 
 // @route         GET /:code
 // @description   Redirect to the original URL
-router.get('/:code', async (req: express.Request, res: express.Response ) => {
+router.get('/:code', async (req: express.Request, res: express.Response) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    
+
     try {
         let encodedURLCode = encodeURIComponent(req.params.code)
         const url = await Url.findOne({
-            urlCode: encodedURLCode
+            urlCode: encodedURLCode,
         })
 
         if (url) {
-            url.hitCount = (url.hitCount || 0) + 1;
+            url.hitCount = (url.hitCount || 0) + 1
             url.save()
 
             // Decrypt Embed Info
@@ -47,24 +47,36 @@ router.get('/:code', async (req: express.Request, res: express.Response ) => {
                 embedDescription = decrypt(embedInfo.description)
                 embedImage = decrypt(embedInfo.image)
             }
-            
-            return res.render('shortURL', { 
+
+            return res.render('shortURL', {
                 url: `${process.env.baseURL}/source/${encodedURLCode}`,
                 baseUrl: process.env.baseURL,
                 title: `This is a URL shortened with ${process.env.instanceName}`,
-            
+
                 // Custom Embed
                 embedTitle: embedTitle,
                 embedDescription: embedDescription,
-                embedImage: embedImage
-                })
+                embedImage: embedImage,
+            })
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: process.env.baseURL, btnMessage: 'Create It!' })
+            return res
+                .status(404)
+                .render('404', {
+                    title: '404',
+                    message: `No shortened URL was found for "${encodedURLCode}"`,
+                    baseUrl: process.env.baseURL,
+                    btnMessage: 'Create It!',
+                })
         }
-    }
-    catch (err: unknown) {
+    } catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res.status(500).render('error', { title: 'Server Error', message: err, baseUrl: process.env.baseURL })
+        return res
+            .status(500)
+            .render('error', {
+                title: 'Server Error',
+                message: err,
+                baseUrl: process.env.baseURL,
+            })
     }
 })
 

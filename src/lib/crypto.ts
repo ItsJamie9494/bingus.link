@@ -20,20 +20,31 @@ const algorithm = 'aes-256-ctr'
 const iv = crypto.randomBytes(16)
 
 export const encrypt = (contents: string) => {
-    const cipher = crypto.createCipheriv(algorithm, process.env.cryptoSecretKey || '', iv)
+    const cipher = crypto.createCipheriv(
+        algorithm,
+        process.env.cryptoSecretKey || '',
+        iv
+    )
 
     const encrypted = Buffer.concat([cipher.update(contents), cipher.final()])
 
     return {
         iv: iv.toString('hex'),
-        content: encrypted.toString('hex')
+        content: encrypted.toString('hex'),
     }
 }
 
 export const decrypt = (hash: HashInterface) => {
-    const decipher = crypto.createDecipheriv(algorithm, process.env.cryptoSecretKey || '', Buffer.from(hash.iv, 'hex'))
+    const decipher = crypto.createDecipheriv(
+        algorithm,
+        process.env.cryptoSecretKey || '',
+        Buffer.from(hash.iv, 'hex')
+    )
 
-    const decryped = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()])
+    const decryped = Buffer.concat([
+        decipher.update(Buffer.from(hash.content, 'hex')),
+        decipher.final(),
+    ])
 
     return decryped.toString()
 }

@@ -21,27 +21,40 @@ const router = express.Router()
 
 // @route         GET /:code
 // @description   Redirect to the original URL
-router.get('/:code', async (req: express.Request, res: express.Response ) => {
+router.get('/:code', async (req: express.Request, res: express.Response) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
 
     let baseURL = process.env.baseURL || 'http://localhost:5000'
-    
+
     try {
         let encodedURLCode = encodeURIComponent(req.params.code)
         const url = await Url.findOne({
-            urlCode: encodedURLCode
+            urlCode: encodedURLCode,
         })
 
         if (url) {
-            return res.render('viewURLHitCount', { code: encodedURLCode, hits: url.hitCount, title: process.env.instanceName, baseUrl: baseURL })
+            return res.render('viewURLHitCount', {
+                code: encodedURLCode,
+                hits: url.hitCount,
+                title: process.env.instanceName,
+                baseUrl: baseURL,
+            })
         } else {
-            return res.status(404).render('404', { title: '404', message: `No shortened URL was found for "${encodedURLCode}"`, baseUrl: process.env.baseURL, btnMessage: 'Create It!' })
+            return res
+                .status(404)
+                .render('404', {
+                    title: '404',
+                    message: `No shortened URL was found for "${encodedURLCode}"`,
+                    baseUrl: process.env.baseURL,
+                    btnMessage: 'Create It!',
+                })
         }
-    }
-    catch (err: unknown) {
+    } catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res.status(500).render('error', { title: 'Server Error', message: err })
+        return res
+            .status(500)
+            .render('error', { title: 'Server Error', message: err })
     }
 })
 

@@ -27,62 +27,98 @@ const router = express.Router()
 
 // @route         POST /api/url/shorten
 // @description   Create Short URL
-router.post('/shorten', apiRateLimit, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    
-    const { 
-        longURL,
-        urlCode = shortid.generate(),
-        embedTitle = `This is a URL shortened with ${process.env.instanceName}`,
-        embedDescription = `Create your own at ${process.env.baseURL}`,
-        embedImage = `${process.env.baseURL}/images/bingus.png`
-    } = req.body
+router.post(
+    '/shorten',
+    apiRateLimit,
+    async (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) => {
+        res.setHeader('Access-Control-Allow-Origin', '*')
+        res.setHeader('Permissions-Policy', 'interest-cohort=()')
 
-    if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {
-        return res.status(500).json({ error: 'invalidBaseURL', message: 'Server Error: Invalid Base URL' })
-    }
+        const {
+            longURL,
+            urlCode = shortid.generate(),
+            embedTitle = `This is a URL shortened with ${process.env.instanceName}`,
+            embedDescription = `Create your own at ${process.env.baseURL}`,
+            embedImage = `${process.env.baseURL}/images/bingus.png`,
+        } = req.body
 
-    let verifiedURL = verifyProtocol(longURL)
-
-    if (validUrl.isUri(verifiedURL)) {
-        try {
-            if (await Url.findOne({
-                urlCode: urlCode
-            })) {
-                return res.status(400).json({ error: 'invalidURLCode',  message: 'Invalid URL Code' })
-            }
-
-            const shortURL = process.env.baseURL + '/' + urlCode
-
-            const embedInfo: EmbedInterface = {
-                title: encrypt(embedTitle),
-                description: encrypt(embedDescription),
-                image: encrypt(embedImage),
-            }
-
-            let url = new Url({
-                urlCode: encodeURIComponent(urlCode),
-                longURL: JSON.stringify(encrypt(verifiedURL)),
-                shortURL,
-                hitCount: 0,
-                embedInfo: JSON.stringify(embedInfo),
-                date: new Date()
+        if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {
+            return res.status(500).json({
+                error: 'invalidBaseURL',
+                message: 'Server Error: Invalid Base URL',
             })
-            await url.save()
-            return res.json({ success: 'URL Created', url: url.shortURL, urlCode: url.urlCode })
-        } catch (err: unknown) {
-            console.error(`❌ ${err}`)
-            return res.status(500).json({ error: 'serverError', message: 'Server Error' })
         }
-    } else {
-        return res.status(400).json({ error: 'invalidLongURL',  message: 'Invalid Long URL' })
+
+        let verifiedURL = verifyProtocol(longURL)
+
+        if (validUrl.isUri(verifiedURL)) {
+            try {
+                if (
+                    await Url.findOne({
+                        urlCode: urlCode,
+                    })
+                ) {
+                    return res
+                        .status(400)
+                        .json({
+                            error: 'invalidURLCode',
+                            message: 'Invalid URL Code',
+                        })
+                }
+
+                const shortURL = process.env.baseURL + '/' + urlCode
+
+                const embedInfo: EmbedInterface = {
+                    title: encrypt(embedTitle),
+                    description: encrypt(embedDescription),
+                    image: encrypt(embedImage),
+                }
+
+                let url = new Url({
+                    urlCode: encodeURIComponent(urlCode),
+                    longURL: JSON.stringify(encrypt(verifiedURL)),
+                    shortURL,
+                    hitCount: 0,
+                    embedInfo: JSON.stringify(embedInfo),
+                    date: new Date(),
+                })
+                await url.save()
+                return res.json({
+                    success: 'URL Created',
+                    url: url.shortURL,
+                    urlCode: url.urlCode,
+                })
+            } catch (err: unknown) {
+                console.error(`❌ ${err}`)
+                return res
+                    .status(500)
+                    .json({ error: 'serverError', message: 'Server Error' })
+            }
+        } else {
+            return res
+                .status(400)
+                .json({ error: 'invalidLongURL', message: 'Invalid Long URL' })
+        }
     }
-})
-router.get('/shorten', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    return res.status(400).json({ error: 'invalidMethod',  message: 'GET is not supported at /api/url/shorten' })
-})
+)
+router.get(
+    '/shorten',
+    async (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) => {
+        res.setHeader('Access-Control-Allow-Origin', '*')
+        res.setHeader('Permissions-Policy', 'interest-cohort=()')
+        return res.status(400).json({
+            error: 'invalidMethod',
+            message: 'GET is not supported at /api/url/shorten',
+        })
+    }
+)
 
 export default router
