@@ -16,12 +16,32 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 @font-face {
-    font-family: 'Inter';
-    src: url('/fonts/Inter.var.woff2') format("woff2-variations");
-    font-weight: 400;
+  font-family: "Inter";
+  src: url("/fonts/Inter.var.woff2") format("woff2-variations");
+  font-weight: 400;
 }
 
-body, html {
+.generator-slider {
+  overflow-y: hidden;
+  max-height: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.generator-slider.open {
+  max-height: 100%;
+}
+
+.embed-slider {
+  overflow-x: hidden;
+  max-width: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.embed-slider.open {
+  max-width: 100%;
+}
+
+/* body, html {
     padding: 0;
     margin: 0;
     font-family: 'Inter', 'Segoe UI', system-ui, Tahoma, Geneva, Verdana, sans-serif;
@@ -265,4 +285,4 @@ img {
     flex-direction: column;
     justify-content: flex-end;
     padding-left: 10px;
-}
+} */
