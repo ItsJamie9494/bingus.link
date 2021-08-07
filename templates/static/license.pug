@@ -13,12 +13,13 @@
 //- You should have received a copy of the GNU Affero General Public License
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-html(lang="en")
-include ../includes/header.pug
-body
-    include ../includes/main-txt.pug
-        h2(id="bl-t") #{title} License
-        pre(id="bl-d-txt").
+extends ../includes/layout.pug
+
+block content
+    section(class="flex-grow flex flex-col items-center justify-center")
+        div(class="flex flex-col items-center")
+            h1(class="text-2xl") #{title} License
+        pre(class="text-gray-600 text-sm mt-5 lg:mx-96 mx-44").
             GNU AFFERO GENERAL PUBLIC LICENSE
             Version 3, 19 November 2007
 
@@ -638,5 +639,3 @@ body
             copy of the Program in return for a fee.
 
             END OF TERMS AND CONDITIONS
-
-    include ../includes/footer.pug
