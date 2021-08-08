@@ -13,10 +13,10 @@
 //- You should have received a copy of the GNU Affero General Public License
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-nav(class="flex justify-between items-center bg-gray-100 px-8 py-4 shadow-2xl")
+nav(class="flex justify-between items-center bg-gray-100 px-8 py-4 shadow-2xl flex-col md:flex-row")
     a(href="/" class="flex items-center hover:underline")
         img(class="w-10 h-10 rounded-full mr-3" src=logo alt=title + " Icon")
         h1(class="text-lg font-medium hover:text-opacity-30")=title
-    div
+    div(class="pt-4 md:pt-0")
         a(class="border-2 border-gray-900 rounded-lg px-2 py-1 mr-2 hover:border-gray-400 hover:text-gray-500 transition-colors" href="/manage") Manage Links
         a(class="border-2 border-blue-500 rounded-lg px-2 py-1 ml-2 hover:border-blue-300 hover:text-gray-500 transition-colors" href="/") Create Your Own

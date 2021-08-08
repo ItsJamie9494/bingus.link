@@ -20,7 +20,10 @@ let embedPreviewStyles = `
     border: 1px solid #bec9d0;
     border-radius: 0.42857em;
     overflow: hidden;
-    width
+    width: 75%;
+    @media (min-width: 1024px) {
+        width: 100%; 
+    }
 `
 const embedPreviewImageStyles = (embedImage: string) => `
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;

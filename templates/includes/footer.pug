@@ -13,10 +13,10 @@
 //- You should have received a copy of the GNU Affero General Public License
 //- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-footer(class="flex justify-between items-center px-10 py-4 bg-gray-300 text-gray-600 text-sm font-medium")
+footer(class="flex justify-between items-center px-10 py-4 bg-gray-300 text-gray-600 text-sm font-medium flex-col md:flex-row")
     p Copyright © #{new Date().getFullYear()} Trevor Thalacker.
 
-    div
+    div(class="flex flex-col sm:flex-row")
         +footer-link('https://gitlab.com/trevorthalacker/bingus-link', 'Source Code')
         +footer-link('https://trevorthalacker.com', 'More Work')
         +footer-link('/abuse', 'Report Abuse')

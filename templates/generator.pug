@@ -16,9 +16,9 @@
 extends includes/layout.pug
 
 block content
-    section(class="flex-grow flex flex-col items-center justify-center")
-        section(class="h-screen flex flex-col")
-            div(class="flex flex-grow flex-col items-center justify-center")
+    section(class="flex-grow flex flex-col items-center justify-center h-full")
+        section(class="h-auto lg:h-screen flex flex-col")
+            div(class="w-screen flex flex-grow flex-col items-center justify-center text-center")
                 div(class="flex flex-col items-center")
                     img(class="h-24 w-24 m-3" src=logo alt=title + " Icon")
                     h1(class="text-2xl")=title
@@ -26,10 +26,10 @@ block content
                 p(class="text-gray-600") A free, private URL shortener with the greatest domain in existence.
                 button(class="border-2 border-blue-500 rounded-lg px-2 py-1 m-2 hover:border-blue-300 hover:text-gray-500 transition-colors text-xl" onclick="document.getElementById('slider').classList.toggle('open');") Create A URL!
                 //- This thing pops out by clicking the button above
-                section(class="generator-slider flex flex-row w-full" id="slider")
-                    form(action="/app/generateLink" method="GET" class="flex flex-col items-center")
-                        section(class="flex flex-row w-full")
-                            div(class="mx-4 flex flex-col w-96")
+                section(class="generator-slider flex flex-row w-full h-auto items-center justify-center" id="slider")
+                    form(action="/app/generateLink" method="GET" class="flex flex-col items-center justify-center")
+                        section(class="flex flex-col lg:flex-row w-full")
+                            div(class="mx-4 flex flex-col lg:w-96")
                                 label(for="longURL") URL to Shorten
                                 input(required type="text" name="longURL" id="longURL" class="form-input mt-1 mb-4 w-full border-2 border-gray-500 rounded transition-all" placeholder="https://example.com" maxlength="255")
                         
@@ -39,10 +39,10 @@ block content
                                 // TODO embeds should be optional
                                 span(class="flex my-4 items-center")
                                     input(type="checkbox" name="embeds" class="form-checkbox border-2 border-blue-500 rounded" onclick="document.getElementById('embed-slider').classList.toggle('open');" id="embeds")
-                                    label(class="ml-3 items-center" for="embeds") Use Embed
+                                    label(class="pl-3 items-center" for="embeds") Use Embed
                             //- Embed Shit
-                            section(class="embed-slider flex flex-row" id="embed-slider")
-                                div(class="mx-4 flex flex-col w-96")
+                            section(class="flex flex-col lg:flex-row w-full embed-slider" id="embed-slider")
+                                div(class="mx-4 flex flex-col lg:w-96")
                                     label(for="embedTitle") Embed Title
                                     input(type="text" name="embedTitle" id="embedTitle" class="form-input mt-1 mb-4 w-full border-2 border-gray-500 rounded transition-all" placeholder="https://example.com" maxlength="255")
                             
@@ -52,7 +52,7 @@ block content
                                     label(for="embedImage") Embed Image
                                     input(type="text" name="embedImage" id="embedImage" class="form-input mt-1 mb-4 w-full border-2 border-gray-500 rounded transition-all" placeholder=baseUrl + "/images/bingus.png" maxlength="255")
                 
-                                div(class="mx-4 flex flex-col w-96")
+                                div(class="mx-4 flex flex-col lg:w-96 items-center justify-center")
                                     //- Custom element that shows an example of what the embed would look like
                                     embedpreview
 
