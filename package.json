@@ -43,6 +43,6 @@
     "dev": "nodemon ./src/server.ts",
     "build": "webpack",
     "start": "node dist/app.js",
-    "css": "postcss tailwind.css -o static/css/bundled.css"
+    "css": "postcss static/css/main.css -o static/css/bundled.css"
   }
 }
