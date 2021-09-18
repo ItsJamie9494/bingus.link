@@ -43,6 +43,14 @@ app.use(
         extended: false,
     })
 )
+
+app.use(
+    express.static(path.resolve('static'), {
+        setHeaders: function (res: express.Response, path) {
+            res.set('Permissions-Policy', 'interest-cohort=()')
+        },
+    })
+)
 app.get('/', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.render('generator', {
@@ -83,14 +91,6 @@ app.get('/js/embed.js', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.sendFile(path.resolve('./dist/embedPreview.js'))
 })
-
-app.use(
-    express.static(path.resolve('static'), {
-        setHeaders: function (res: express.Response, path) {
-            res.set('Permissions-Policy', 'interest-cohort=()')
-        },
-    })
-)
 
 // Error Pages
 app.use((req: express.Request, res: express.Response) => {
