@@ -20,9 +20,15 @@ const PASSWORD = process.env.DB_PASSWORD
 const HOST = process.env.DB_HOST
 const DB = process.env.DB
 
-const DB_URI = `mongodb+srv://${USER}:${encodeURIComponent(
+let DB_URI = `mongodb+srv://${USER}:${encodeURIComponent(
     PASSWORD || ''
 )}@${HOST}/${DB}?retryWrites=true&w=majority`
+
+if (HOST === 'localhost') {
+    DB_URI = `mongodb://${USER}:${encodeURIComponent(
+        PASSWORD || ''
+    )}@${HOST}/${DB}?retryWrites=true&w=majority&ssl=false`
+}
 
 mongoose.connect(DB_URI, {
     useNewUrlParser: true,
