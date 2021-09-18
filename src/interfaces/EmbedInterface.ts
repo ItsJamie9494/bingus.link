@@ -1,4 +1,4 @@
-// Copyright (C) 2021 Trevor Thalacker
+// Copyright (C) 2021 Jamie Thalacker
 
 import { HashInterface } from './HashInterface'
 

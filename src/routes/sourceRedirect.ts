@@ -1,4 +1,4 @@
-// Copyright (C) 2021 Trevor Thalacker
+// Copyright (C) 2021 Jamie Thalacker
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published
@@ -36,24 +36,20 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
             return res.redirect(decryptedURL)
         } else {
-            return res
-                .status(404)
-                .render('404', {
-                    title: '404',
-                    message: `No shortened URL was found for "${encodedURLCode}"`,
-                    baseUrl: process.env.baseURL,
-                    btnMessage: 'Create It!',
-                })
+            return res.status(404).render('404', {
+                title: '404',
+                message: `No shortened URL was found for "${encodedURLCode}"`,
+                baseUrl: process.env.baseURL,
+                btnMessage: 'Create It!',
+            })
         }
     } catch (err: unknown) {
         console.error(`❌ Server Error: ${err}`)
-        return res
-            .status(500)
-            .render('error', {
-                title: 'Server Error',
-                message: err,
-                baseUrl: process.env.baseURL,
-            })
+        return res.status(500).render('error', {
+            title: 'Server Error',
+            message: err,
+            baseUrl: process.env.baseURL,
+        })
     }
 })
 

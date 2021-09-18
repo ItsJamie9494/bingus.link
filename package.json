@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Simple URL Shortener powering bingus.link",
   "main": "dist/app.js",
-  "repository": "https://github.com/trevorthalacker/bingus.link.git",
-  "author": "Trevor Thalacker <hello@trevorthalacker.com>",
+  "repository": "https://gitlab.com/jamiethalacker/bingus-link.git",
+  "author": "Jamie Thalacker <hello@jamiethalacker.dev>",
   "license": "AGPL-3.0",
   "private": true,
   "dependencies": {

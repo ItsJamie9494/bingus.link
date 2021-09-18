@@ -1,4 +1,4 @@
-// Copyright (C) 2021 Trevor Thalacker
+// Copyright (C) 2021 Jamie Thalacker
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published
@@ -62,12 +62,10 @@ router.post(
                         urlCode: urlCode,
                     })
                 ) {
-                    return res
-                        .status(400)
-                        .json({
-                            error: 'invalidURLCode',
-                            message: 'Invalid URL Code',
-                        })
+                    return res.status(400).json({
+                        error: 'invalidURLCode',
+                        message: 'Invalid URL Code',
+                    })
                 }
 
                 const shortURL = process.env.baseURL + '/' + urlCode
