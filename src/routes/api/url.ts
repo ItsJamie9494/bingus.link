@@ -17,12 +17,12 @@ import express from 'express'
 import validUrl from 'valid-url'
 import shortid from 'shortid'
 
-import Url from '../models/UrlModel'
-import { encrypt, hash } from '../lib/crypto'
-import apiRateLimit from '../lib/ratelimit'
-import { verifyProtocol } from '../lib/url'
-import { EmbedInterface } from '../interfaces/EmbedInterface'
-import { env } from '../env'
+import Url from '../../models/UrlModel'
+import { encrypt, hash } from '../../lib/crypto'
+import apiRateLimit from '../../lib/ratelimit'
+import { verifyProtocol } from '../../lib/url'
+import { EmbedInterface } from '../../interfaces/EmbedInterface'
+import { env } from '../../env'
 
 const router = express.Router()
 

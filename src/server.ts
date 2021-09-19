@@ -21,11 +21,11 @@ import pug from 'pug'
 // Routes
 import connection from './lib/database'
 import redirect from './routes/redirect'
-import sourceRedirect from './routes/sourceRedirect'
-import contents from './routes/contents'
-import hitCounts from './routes/hitCounts'
-import url from './routes/url'
-import generateLink from './routes/ui/generateLink'
+import sourceRedirect from './routes/source'
+import contents from './routes/where'
+import hitCounts from './routes/hits'
+import url from './routes/api/url'
+import generateLink from './routes/app/generateLink'
 import { env } from './env'
 
 const app = express()
