@@ -16,9 +16,10 @@
 import mongoose from 'mongoose'
 
 const URLSchema = new mongoose.Schema({
+    schemaVersion: String,
     urlCode: String,
     longURL: String,
-    shortURL: String,
+    shortURL: String, // this gets to stay but only for backwards compatibility
     hitCount: Number,
     embedInfo: String,
     date: {

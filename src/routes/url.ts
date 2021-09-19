@@ -18,7 +18,7 @@ import validUrl from 'valid-url'
 import shortid from 'shortid'
 
 import Url from '../models/UrlModel'
-import { encrypt } from '../lib/crypto'
+import { encrypt, hash } from '../lib/crypto'
 import apiRateLimit from '../lib/ratelimit'
 import { verifyProtocol } from '../lib/url'
 import { EmbedInterface } from '../interfaces/EmbedInterface'
@@ -77,9 +77,9 @@ router.post(
                 }
 
                 let url = new Url({
-                    urlCode: encodeURIComponent(urlCode),
+                    schemaVersion: 1, // This tells us the URL uses the Newer Format
+                    urlCode: hash(encodeURIComponent(urlCode)), // We hash the URL code
                     longURL: JSON.stringify(encrypt(verifiedURL)),
-                    shortURL,
                     hitCount: 0,
                     embedInfo: JSON.stringify(embedInfo),
                     date: new Date(),
@@ -87,8 +87,8 @@ router.post(
                 await url.save()
                 return res.json({
                     success: 'URL Created',
-                    url: url.shortURL,
-                    urlCode: url.urlCode,
+                    url: `${process.env.baseURL}/${urlCode}`,
+                    urlCode: urlCode,
                 })
             } catch (err: unknown) {
                 console.error(`❌ ${err}`)
