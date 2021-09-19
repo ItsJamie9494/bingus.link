@@ -48,3 +48,14 @@ export const decrypt = (hash: HashInterface) => {
 
     return decryped.toString()
 }
+
+export const hash = (contents: string) => {
+    const algorithm = 'md5'
+
+    const hashed = crypto
+        .createHash(algorithm)
+        .update(contents)
+        .digest('base64')
+
+    return hashed
+}
