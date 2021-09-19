@@ -22,6 +22,7 @@ import { encrypt, hash } from '../lib/crypto'
 import apiRateLimit from '../lib/ratelimit'
 import { verifyProtocol } from '../lib/url'
 import { EmbedInterface } from '../interfaces/EmbedInterface'
+import { env } from '../env'
 
 const router = express.Router()
 
@@ -41,12 +42,12 @@ router.post(
         const {
             longURL,
             urlCode = shortid.generate(),
-            embedTitle = `This is a URL shortened with ${process.env.instanceName}`,
-            embedDescription = `Create your own at ${process.env.baseURL}`,
-            embedImage = `${process.env.baseURL}/images/bingus.png`,
+            embedTitle = `This is a URL shortened with ${env.instance.base_url}`,
+            embedDescription = `Create your own at ${env.instance.base_url}`,
+            embedImage = `${env.instance.base_url}/images/bingus.png`,
         } = req.body
 
-        if (!validUrl.isUri(process.env.baseURL || 'http://localhost:5000')) {
+        if (!validUrl.isUri(env.instance.base_url || 'http://localhost:5000')) {
             return res.status(500).json({
                 error: 'invalidBaseURL',
                 message: 'Server Error: Invalid Base URL',
@@ -68,8 +69,6 @@ router.post(
                     })
                 }
 
-                const shortURL = process.env.baseURL + '/' + urlCode
-
                 const embedInfo: EmbedInterface = {
                     title: encrypt(embedTitle),
                     description: encrypt(embedDescription),
@@ -87,7 +86,7 @@ router.post(
                 await url.save()
                 return res.json({
                     success: 'URL Created',
-                    url: `${process.env.baseURL}/${urlCode}`,
+                    url: `${env.instance.base_url}/${urlCode}`,
                     urlCode: urlCode,
                 })
             } catch (err: unknown) {

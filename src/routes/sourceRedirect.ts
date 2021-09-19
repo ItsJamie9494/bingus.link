@@ -17,6 +17,7 @@ import express from 'express'
 
 import Url from '../models/UrlModel'
 import { decrypt, hash } from '../lib/crypto'
+import { env } from '../env'
 
 const router = express.Router()
 
@@ -40,7 +41,7 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
             return res.status(404).render('404', {
                 title: '404',
                 message: `No shortened URL was found for "${encodedURLCode}"`,
-                baseUrl: process.env.baseURL,
+                baseUrl: env.instance.base_url,
                 btnMessage: 'Create It!',
             })
         }
@@ -49,7 +50,7 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
         return res.status(500).render('error', {
             title: 'Server Error',
             message: err,
-            baseUrl: process.env.baseURL,
+            baseUrl: env.instance.base_url,
         })
     }
 })

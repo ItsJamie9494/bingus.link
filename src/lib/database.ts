@@ -14,11 +14,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import mongoose from 'mongoose'
+import { env } from '../env'
 
-const USER = process.env.DB_USER
-const PASSWORD = process.env.DB_PASSWORD
-const HOST = process.env.DB_HOST
-const DB = process.env.DB
+const USER = env.database.user
+const PASSWORD = env.database.password
+const HOST = env.database.host
+const DB = env.database.collection
 
 let DB_URI = `mongodb+srv://${USER}:${encodeURIComponent(
     PASSWORD || ''

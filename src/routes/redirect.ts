@@ -14,6 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import express from 'express'
+import { env } from '../env'
 import { decrypt, hash } from '../lib/crypto'
 
 import Url from '../models/UrlModel'
@@ -38,9 +39,9 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
             url.save()
 
             // Decrypt Embed Info
-            let embedTitle = `This is a URL shortened with ${process.env.instanceName}`
-            let embedDescription = `Create your own at ${process.env.baseURL}`
-            let embedImage = `${process.env.baseURL}/images/bingus.png`
+            let embedTitle = `This is a URL shortened with ${env.instance.name}`
+            let embedDescription = `Create your own at ${env.instance.base_url}`
+            let embedImage = `${env.instance.base_url}/images/bingus.png`
 
             if (url.embedInfo) {
                 let embedInfo = JSON.parse(url.embedInfo)
@@ -50,9 +51,9 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
             }
 
             return res.render('shortURL', {
-                url: `${process.env.baseURL}/source/${encodedURLCode}`,
-                baseUrl: process.env.baseURL,
-                title: `This is a URL shortened with ${process.env.instanceName}`,
+                url: `${env.instance.base_url}/source/${encodedURLCode}`,
+                baseUrl: env.instance.base_url,
+                title: `This is a URL shortened with ${env.instance.name}`,
 
                 // Custom Embed
                 embedTitle: embedTitle,
@@ -63,7 +64,7 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
             return res.status(404).render('404', {
                 title: '404',
                 message: `No shortened URL was found for "${encodedURLCode}"`,
-                baseUrl: process.env.baseURL,
+                baseUrl: env.instance.base_url,
                 btnMessage: 'Create It!',
             })
         }
@@ -72,7 +73,7 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
         return res.status(500).render('error', {
             title: 'Server Error',
             message: err,
-            baseUrl: process.env.baseURL,
+            baseUrl: env.instance.base_url,
         })
     }
 })

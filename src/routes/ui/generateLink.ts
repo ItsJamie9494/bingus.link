@@ -15,6 +15,7 @@
 
 import express from 'express'
 import axios, { AxiosError, AxiosResponse } from 'axios'
+import { env } from '../../env'
 
 const router = express.Router()
 
@@ -26,12 +27,12 @@ router.get(
         res.header('Access-Control-Allow-Origin', '*')
         res.setHeader('Permissions-Policy', 'interest-cohort=()')
 
-        let baseURL = process.env.baseURL || 'http://localhost:5000'
+        let baseURL = env.instance.base_url || 'http://localhost:5000'
 
         // Verify that query is valid
         if (req.query.longURL === '' || req.query.longURL === undefined) {
             return res.render('generateLink/error', {
-                title: process.env.instanceName,
+                title: env.instance.name,
                 baseUrl: baseURL,
             })
         }
@@ -66,8 +67,8 @@ router.get(
                     res.render('generateLink/success', {
                         url: axiosRes.data.url,
                         baseUrl: baseURL,
-                        hitsUrl: `${process.env.baseURL}/hits/${axiosRes.data.urlCode}`,
-                        title: process.env.instanceName,
+                        hitsUrl: `${env.instance.base_url}/hits/${axiosRes.data.urlCode}`,
+                        title: env.instance.name,
                     })
                 }
             })
@@ -78,7 +79,7 @@ router.get(
                 ) {
                     console.error('❌ User Invalid URL Code')
                     res.render('generateLink/invalidUrlCode', {
-                        title: process.env.instanceName,
+                        title: env.instance.name,
                         baseUrl: baseURL,
                     })
                 } else if (
@@ -87,13 +88,13 @@ router.get(
                 ) {
                     console.error('❌ User Rate Limited')
                     res.render('generateLink/rateLimit', {
-                        title: process.env.instanceName,
+                        title: env.instance.name,
                         baseUrl: baseURL,
                     })
                 } else {
                     console.error(`❌ Unknown Error, ${err}`)
                     res.render('generateLink/error', {
-                        title: process.env.instanceName,
+                        title: env.instance.name,
                         baseUrl: baseURL,
                     })
                 }

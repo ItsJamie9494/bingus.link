@@ -14,6 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import crypto from 'crypto'
+import { env } from '../env'
 import { HashInterface } from '../interfaces/HashInterface'
 
 const algorithm = 'aes-256-ctr'
@@ -22,7 +23,7 @@ const iv = crypto.randomBytes(16)
 export const encrypt = (contents: string) => {
     const cipher = crypto.createCipheriv(
         algorithm,
-        process.env.cryptoSecretKey || '',
+        env.crypto.secret_key || '',
         iv
     )
 
@@ -37,7 +38,7 @@ export const encrypt = (contents: string) => {
 export const decrypt = (hash: HashInterface) => {
     const decipher = crypto.createDecipheriv(
         algorithm,
-        process.env.cryptoSecretKey || '',
+        env.crypto.secret_key || '',
         Buffer.from(hash.iv, 'hex')
     )
 

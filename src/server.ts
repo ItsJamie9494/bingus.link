@@ -14,8 +14,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import express from 'express'
-import * as dotenv from 'dotenv'
-dotenv.config()
 import { urlencoded } from 'body-parser'
 import path from 'path'
 import pug from 'pug'
@@ -28,6 +26,7 @@ import contents from './routes/contents'
 import hitCounts from './routes/hitCounts'
 import url from './routes/url'
 import generateLink from './routes/ui/generateLink'
+import { env } from './env'
 
 const app = express()
 app.set('views', path.resolve('templates'))
@@ -54,29 +53,29 @@ app.use(
 app.get('/', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.render('generator', {
-        title: process.env.instanceName,
-        baseUrl: process.env.baseURL,
+        title: env.instance.name,
+        baseUrl: env.instance.base_url,
     })
 })
 app.get('/license', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.render('static/license', {
-        title: process.env.instanceName,
-        baseUrl: process.env.baseURL,
+        title: env.instance.name,
+        baseUrl: env.instance.base_url,
     })
 })
 app.get('/privacy', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.render('static/privacy', {
-        title: process.env.instanceName,
-        baseUrl: process.env.baseURL,
+        title: env.instance.name,
+        baseUrl: env.instance.base_url,
     })
 })
 app.get('/abuse', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.render('static/abuse', {
-        title: process.env.instanceName,
-        baseUrl: process.env.baseURL,
+        title: env.instance.name,
+        baseUrl: env.instance.base_url,
     })
 })
 app.use('/', redirect)
@@ -98,7 +97,7 @@ app.use((req: express.Request, res: express.Response) => {
     return res.status(404).render('404', {
         title: '404',
         message: `How you got here is a mystery. Let's get you back.`,
-        baseUrl: process.env.baseURL,
+        baseUrl: env.instance.base_url,
         btnMessage: 'Go Back',
     })
 })

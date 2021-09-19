@@ -14,6 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import express from 'express'
+import { env } from '../env'
 import { hash } from '../lib/crypto'
 
 import Url from '../models/UrlModel'
@@ -26,7 +27,7 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
 
-    let baseURL = process.env.baseURL || 'http://localhost:5000'
+    let baseURL = env.instance.base_url || 'http://localhost:5000'
 
     try {
         let encodedURLCode = encodeURIComponent(req.params.code)
@@ -39,14 +40,14 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
             return res.render('viewURLHitCount', {
                 code: encodedURLCode,
                 hits: url.hitCount,
-                title: process.env.instanceName,
+                title: env.instance.name,
                 baseUrl: baseURL,
             })
         } else {
             return res.status(404).render('404', {
                 title: '404',
                 message: `No shortened URL was found for "${encodedURLCode}"`,
-                baseUrl: process.env.baseURL,
+                baseUrl: env.instance.base_url,
                 btnMessage: 'Create It!',
             })
         }
