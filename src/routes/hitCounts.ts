@@ -14,6 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import express from 'express'
+import { hash } from '../lib/crypto'
 
 import Url from '../models/UrlModel'
 
@@ -29,8 +30,9 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
 
     try {
         let encodedURLCode = encodeURIComponent(req.params.code)
+        let hashedURlCode = hash(encodedURLCode)
         const url = await Url.findOne({
-            urlCode: encodedURLCode,
+            urlCode: hashedURlCode,
         })
 
         if (url) {
