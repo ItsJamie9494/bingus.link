@@ -85,6 +85,13 @@ app.get('/abuse', (req: express.Request, res: express.Response) => {
         baseUrl: env.instance.base_url,
     })
 })
+app.get('/terms', (req: express.Request, res: express.Response) => {
+    res.setHeader('Permissions-Policy', 'interest-cohort=()')
+    res.render('static/terms', {
+        title: env.instance.name,
+        baseUrl: env.instance.base_url,
+    })
+})
 app.use('/', redirect)
 app.use('/app/', generateLink)
 app.use('/source', sourceRedirect)
