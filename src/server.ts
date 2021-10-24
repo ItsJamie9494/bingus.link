@@ -57,13 +57,13 @@ app.get('/', (req: express.Request, res: express.Response) => {
         baseUrl: env.instance.base_url,
     })
 })
-app.get('/manage/login', (req: express.Request, res: express.Response) => {
-    res.setHeader('Permissions-Policy', 'interest-cohort=()')
-    res.render('admin/login', {
-        title: env.instance.name,
-        baseUrl: env.instance.base_url,
-    })
-})
+// app.get('/manage/login', (req: express.Request, res: express.Response) => {
+//     res.setHeader('Permissions-Policy', 'interest-cohort=()')
+//     res.render('admin/login', {
+//         title: env.instance.name,
+//         baseUrl: env.instance.base_url,
+//     })
+// })
 app.get('/license', (req: express.Request, res: express.Response) => {
     res.setHeader('Permissions-Policy', 'interest-cohort=()')
     res.render('static/license', {
