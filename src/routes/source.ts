@@ -18,6 +18,7 @@ import express from 'express'
 import Url from '../models/UrlModel'
 import { decrypt, hash } from '../lib/crypto'
 import { env } from '../env'
+import { findURL } from '../lib/url'
 
 const router = express.Router()
 
@@ -29,10 +30,7 @@ router.get('/:code', async (req: express.Request, res: express.Response) => {
 
     try {
         let encodedURLCode = encodeURIComponent(req.params.code)
-        let hashedURLCode = hash(encodedURLCode)
-        const url = await Url.findOne({
-            urlCode: hashedURLCode,
-        })
+        let url = await findURL(encodedURLCode)
 
         if (url) {
             let decryptedURL = decrypt(JSON.parse(url.longURL))
