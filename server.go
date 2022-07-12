@@ -14,9 +14,9 @@ func NewServer() (*Server, error) {
 
 func (s *Server) GetHTTPHandler() http.Handler {
 	r := mux.NewRouter()
+	r.Use(RequestLoggerMiddleware(r))
 
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./static/")))).Methods("GET")
-
 	r.NotFoundHandler = r.NewRoute().HandlerFunc(NotFoundHandler).GetHandler()
 
 	return r
