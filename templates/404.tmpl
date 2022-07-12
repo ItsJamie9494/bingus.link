@@ -1,0 +1,14 @@
+<html lang="en">
+  {{ template "header.tmpl" . }}
+  <body>
+    <div id="bl">
+      <img src="/assets/images/bingus.png" id="blgo" />
+      <h2 id="bl-t">{{ .Title }}</h2>
+      <p id="bl-d">{{ .Message }}</p>
+      <a href="/">
+        <button id="bl-btn">{{ .BtnMessage }}</button>
+      </a>
+    </div>
+    {{ template "footer.tmpl" . }}
+  </body>
+</html>
