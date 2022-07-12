@@ -1,7 +1,0 @@
-node_modules
-dist
-
-database
-
-.env
-static/css/bundled.css

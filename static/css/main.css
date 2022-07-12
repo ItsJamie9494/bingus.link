@@ -1,0 +1,254 @@
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter.var.woff2") format("woff2-variations");
+  font-weight: 400;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", "Segoe UI", system-ui, Tahoma, Geneva, Verdana,
+    sans-serif;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#bl-txt {
+  height: 100%;
+  border-radius: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#bl {
+  width: 95vw;
+  height: calc(100vh - 40px);
+  border-radius: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#bl-d-txt {
+  max-width: 90%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#bl-d-hc {
+  display: none;
+}
+
+#bl-ftr {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: space-between;
+  height: 40px;
+  padding-left: 15vw;
+}
+
+#bl-ftr * {
+  margin: 0;
+}
+
+#bl-ftr-l {
+  left: 15vw;
+  position: absolute;
+  max-height: 40px;
+}
+
+#bl-ftr-r {
+  right: 15vw;
+  position: absolute;
+  max-height: 40px;
+}
+
+#bl-ftr-r a {
+  margin-left: 15px;
+  margin-right: 15px;
+  opacity: 0.5;
+  color: #000000;
+}
+
+@media screen and (max-width: 1024px) {
+  #bl-ftr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  #bl-ftr-l {
+    left: auto;
+    max-height: auto;
+    position: relative;
+  }
+
+  #bl-flr-l * {
+    max-width: fit-content;
+    max-height: auto;
+  }
+
+  #bl-ftr-r {
+    right: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: max-content;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #bl-ftr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 20px;
+    height: auto;
+  }
+
+  #bl-ftr-l {
+    left: auto;
+    max-height: auto;
+    position: relative;
+  }
+
+  #bl-flr-l * {
+    max-width: fit-content;
+    max-height: auto;
+  }
+
+  #bl-ftr-r {
+    right: auto;
+    max-height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+#blgo {
+  height: 52px;
+  min-height: 52px;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="text"] {
+  width: 100%;
+  max-width: 468px;
+  resize: none;
+  background-color: rgb(243, 243, 243);
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  padding: 10px;
+}
+
+label {
+  opacity: 0.5;
+  text-align: left;
+  padding-bottom: 5px;
+  margin-top: 10px;
+}
+
+label[for="bl-lu"] {
+  margin-top: -10px;
+}
+
+p {
+  opacity: 0.5;
+  margin: 0;
+  margin-top: -6px;
+  margin-bottom: 28px;
+  max-width: 400px;
+  word-wrap: break-word;
+}
+
+pre {
+  opacity: 0.5;
+  margin: 0;
+  margin-top: -6px;
+  margin-bottom: 28px;
+}
+
+button {
+  margin: 24px 0;
+  padding: 10px 20px;
+  background-color: #256ef5;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  border: none;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: 0.2s all;
+}
+
+#bl-btn-h {
+  display: none;
+}
+
+button:hover {
+  border: 2px solid #256ef5;
+  background-color: transparent;
+  color: #256ef5;
+  cursor: pointer;
+}
+
+button:focus {
+  border: 2px solid #256ef5;
+  background-color: transparent;
+  color: #256ef5;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px #256ef582;
+}
+
+#bl,
+#bl-done {
+  transition: 0.3s opacity;
+}
+
+img {
+  max-width: 100%;
+}
+
+#bl-f-f {
+  display: flex;
+  flex-direction: row;
+}
+
+#bl-f-l {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+#bl-f-r {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 10px;
+}
